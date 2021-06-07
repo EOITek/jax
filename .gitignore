@@ -1,0 +1,30 @@
+# idea
+.idea
+*.iml
+
+# building
+target
+build
+tmp*
+dist
+test-output
+build.log
+jax/*
+
+# other scm
+.svn
+.CVS
+.hg*
+
+#  project
+logs/
+
+# mac
+.DS_Store
+dependency-reduced-pom.xml
+
+jax_python/__pycache__
+node_modules
+
+*.pyc
+.gradle
