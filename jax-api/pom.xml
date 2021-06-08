@@ -7,11 +7,10 @@
   <parent>
     <artifactId>jax-root</artifactId>
     <groupId>com.eoi</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>jax-api</artifactId>
-  <version>1.0-SNAPSHOT</version>
 
   <name>jax-api</name>
 

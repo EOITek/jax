@@ -7,9 +7,12 @@
     <groupId>com.eoi</groupId>
     <artifactId>jax-root</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>jax-api</module>
+        <module>jax-core</module>
+        <module>jax-common</module>
+        <module>jax-api-flink-1_9</module>
     </modules>
 
     <name>jax-root</name>
@@ -28,8 +31,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <jackson.version>2.10.5</jackson.version>
+        <jackson.databind.version>2.10.5</jackson.databind.version>
         <flink.table.planner>flink-table-planner_</flink.table.planner>
+        <jax.api.module>jax-api-1_9</jax.api.module>
+        <java-webSocket.version>1.5.1</java-webSocket.version>
+        <scala.version>2.11.12</scala.version>
         <scala.binary.version>2.11</scala.binary.version>
+        <parser.combinators.version>1.1.1</parser.combinators.version>
         <hutool.version>5.1.0</hutool.version>
         <beanutils.version>1.9.4</beanutils.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -40,6 +49,53 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- scala -->
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-compiler</artifactId>
+                <version>${scala.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang.modules</groupId>
+                <artifactId>scala-parser-combinators_${scala.binary.version}</artifactId>
+                <version>${parser.combinators.version}</version>
+            </dependency>
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-scala_${scala.binary.version}</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-joda</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.databind.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
             <!-- log -->
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -152,6 +208,13 @@
                 <artifactId>commons-beanutils</artifactId>
                 <version>${beanutils.version}</version>
             </dependency>
+
+            <!-- WebSocket -->
+            <dependency>
+                <groupId>org.java-websocket</groupId>
+                <artifactId>Java-WebSocket</artifactId>
+                <version>${java-webSocket.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -179,12 +242,14 @@
                             <exclude>**/*.yml</exclude>
                             <exclude>**/*.md</exclude>
                             <exclude>**/*.xml</exclude>
+                            <exclude>**/resources/**</exclude>
                             <exclude>.editorconfig</exclude>
                             <exclude>.gitignore</exclude>
                             <exclude>mvnw.cmd</exclude>
                         </excludes>
                         <mapping>
                             <java>SLASHSTAR_STYLE</java>
+                            <scala>SLASHSTAR_STYLE</scala>
                         </mapping>
                     </configuration>
                 </plugin>
@@ -215,6 +280,47 @@
                             </configuration>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>scala-maven-plugin</artifactId>
+                    <version>3.1.4</version>
+                    <executions>
+                        <!-- Run scala compiler in the process-resources phase, so that dependencies on
+                            scala classes can be resolved later in the (Java) compile phase -->
+                        <execution>
+                            <id>scala-compile-first</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+
+                        <!-- Run scala compiler in the process-test-resources phase, so that dependencies on
+                             scala classes can be resolved later in the (Java) test-compile phase -->
+                        <execution>
+                            <id>scala-test-compile</id>
+                            <phase>process-test-resources</phase>
+                            <goals>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+
+                        <execution>
+                            <id>scala-add-source</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>add-source</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <jvmArgs>
+                            <jvmArg>-Xms128m</jvmArg>
+                            <jvmArg>-Xmx512m</jvmArg>
+                        </jvmArgs>
+                        <addScalacArgs>-target:jvm-1.8</addScalacArgs>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

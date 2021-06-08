@@ -1,0 +1,13 @@
+# https://www.bro.org/sphinx/script-reference/log-files.html
+
+# http.log
+BRO_HTTP %{NUMBER:ts}\t%{NOTSPACE:uid}\t%{IP:origH}\t%{INT:origP}\t%{IP:respH}\t%{INT:respP}\t%{INT:transDepth}\t%{GREEDYDATA:method}\t%{GREEDYDATA:domain}\t%{GREEDYDATA:uri}\t%{GREEDYDATA:referrer}\t%{GREEDYDATA:userAgent}\t%{NUMBER:request_body_len}\t%{NUMBER:response_body_len}\t%{GREEDYDATA:statusCode}\t%{GREEDYDATA:status_msg}\t%{GREEDYDATA:info_code}\t%{GREEDYDATA:info_msg}\t%{GREEDYDATA:filename}\t%{GREEDYDATA:bro_tags}\t%{GREEDYDATA:username}\t%{GREEDYDATA:password}\t%{GREEDYDATA:proxied}\t%{GREEDYDATA:orig_fuids}\t%{GREEDYDATA:orig_mimeTypes}\t%{GREEDYDATA:resp_fuids}\t%{GREEDYDATA:resp_mimeTypes}
+
+# dns.log
+BRO_DNS %{NUMBER:ts}\t%{NOTSPACE:uid}\t%{IP:origH}\t%{INT:origP}\t%{IP:respH}\t%{INT:respP}\t%{WORD:proto}\t%{INT:transId}\t%{GREEDYDATA:query}\t%{GREEDYDATA:qclass}\t%{GREEDYDATA:qclassName}\t%{GREEDYDATA:qtype}\t%{GREEDYDATA:qtypeName}\t%{GREEDYDATA:rcode}\t%{GREEDYDATA:rcode_name}\t%{GREEDYDATA:AA}\t%{GREEDYDATA:TC}\t%{GREEDYDATA:RD}\t%{GREEDYDATA:RA}\t%{GREEDYDATA:Z}\t%{GREEDYDATA:answers}\t%{GREEDYDATA:TTLs}\t%{GREEDYDATA:rejected}
+
+# conn.log
+BRO_CONN %{NUMBER:ts}\t%{NOTSPACE:uid}\t%{IP:origH}\t%{INT:origP}\t%{IP:respH}\t%{INT:respP}\t%{WORD:proto}\t%{GREEDYDATA:service}\t%{NUMBER:duration}\t%{NUMBER:origBytes}\t%{NUMBER:respBytes}\t%{GREEDYDATA:conn_state}\t%{GREEDYDATA:local_orig}\t%{GREEDYDATA:missed_bytes}\t%{GREEDYDATA:history}\t%{GREEDYDATA:origPkts}\t%{GREEDYDATA:orig_ip_bytes}\t%{GREEDYDATA:respPkts}\t%{GREEDYDATA:resp_ip_bytes}\t%{GREEDYDATA:tunnel_parents}
+
+# files.log
+BRO_FILES %{NUMBER:ts}\t%{NOTSPACE:fuid}\t%{IP:tx_hosts}\t%{IP:rx_hosts}\t%{NOTSPACE:connUids}\t%{GREEDYDATA:source}\t%{GREEDYDATA:depth}\t%{GREEDYDATA:analyzers}\t%{GREEDYDATA:mimeType}\t%{GREEDYDATA:filename}\t%{GREEDYDATA:duration}\t%{GREEDYDATA:local_orig}\t%{GREEDYDATA:is_orig}\t%{GREEDYDATA:seen_bytes}\t%{GREEDYDATA:total_bytes}\t%{GREEDYDATA:missing_bytes}\t%{GREEDYDATA:overflow_bytes}\t%{GREEDYDATA:timedout}\t%{GREEDYDATA:parent_fuid}\t%{GREEDYDATA:md5}\t%{GREEDYDATA:sha1}\t%{GREEDYDATA:sha256}\t%{GREEDYDATA:extracted}
