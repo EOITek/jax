@@ -25,3 +25,6 @@ jobs:
       - name: Maven Checks
         run: |
           ./mvnw validate
+      - name: Maven Tests
+        run: |
+          ./mvnw test

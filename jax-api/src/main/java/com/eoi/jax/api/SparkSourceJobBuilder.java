@@ -14,7 +14,7 @@
 
 package com.eoi.jax.api;
 
-public interface SparkSourceJobBuilder<O, C> extends BatchSourceBuilder<O, C> {
+public interface SparkSourceJobBuilder<OUT, C> extends BatchSourceBuilder<OUT, C> {
 
     /**
      * @param context spark env
@@ -22,5 +22,5 @@ public interface SparkSourceJobBuilder<O, C> extends BatchSourceBuilder<O, C> {
      * @return 输出对象
      * @throws Throwable 异常
      */
-    O build(SparkEnvironment context, C config) throws Throwable;
+    OUT build(SparkEnvironment context, C config) throws Throwable;
 }

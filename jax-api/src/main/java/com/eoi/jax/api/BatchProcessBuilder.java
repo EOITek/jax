@@ -14,5 +14,5 @@
 
 package com.eoi.jax.api;
 
-public interface BatchProcessBuilder<I, O, C> extends Builder<C> {
+public interface BatchProcessBuilder<IN, OUT, C> extends Builder<C> {
 }

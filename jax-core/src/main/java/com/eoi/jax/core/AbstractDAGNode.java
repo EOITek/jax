@@ -17,7 +17,6 @@ package com.eoi.jax.core;
 /**
  * DAGNode，用于AbstractDAGVisitor的Node必须至少实现这个类
  */
-// CHECKSTYLE.OFF:
 public abstract class AbstractDAGNode {
     /**
      * 返回唯一的节点号，用于唯一定位节点
@@ -25,4 +24,3 @@ public abstract class AbstractDAGNode {
      */
     public abstract String getId();
 }
-// CHECKSTYLE.ON:

@@ -40,9 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-// CHECKSTYLE.OFF:
 public class SparkJobDAGBuilder extends BaseJobDAGBuilder<SparkJobNode> {
-    // CHECKSTYLE.ON:
 
     private static Logger logger = LoggerFactory.getLogger(SparkJobDAGBuilder.class);
 

@@ -14,5 +14,5 @@
 
 package com.eoi.jax.api;
 
-public interface BatchSinkBuilder<I, C> extends Builder<C> {
+public interface BatchSinkBuilder<IN, C> extends Builder<C> {
 }

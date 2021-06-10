@@ -14,6 +14,6 @@
 
 package com.eoi.jax.api;
 
-public interface SparkSinkJobBuilder<I, C> extends BatchSinkBuilder<I, C> {
-    void build(SparkEnvironment context, I in, C config) throws Throwable;
+public interface SparkSinkJobBuilder<IN, C> extends BatchSinkBuilder<IN, C> {
+    void build(SparkEnvironment context, IN in, C config) throws Throwable;
 }

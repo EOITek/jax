@@ -14,6 +14,6 @@
 
 package com.eoi.jax.api;
 
-public interface SparkProcessJobBuilder<I, O, C> extends BatchProcessBuilder<I, O, C> {
-    O build(SparkEnvironment context, I in, C config) throws Throwable;
+public interface SparkProcessJobBuilder<IN, OUT, C> extends BatchProcessBuilder<IN, OUT, C> {
+    OUT build(SparkEnvironment context, IN in, C config) throws Throwable;
 }

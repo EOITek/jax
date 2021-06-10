@@ -28,9 +28,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-// CHECKSTYLE.OFF:
 public abstract class BaseJobDAGBuilder<C extends BaseJobNode> extends AbstractDAGVisitor<C> {
-    // CHECKSTYLE.ON:
 
     public void build() throws Throwable {
         getChain();

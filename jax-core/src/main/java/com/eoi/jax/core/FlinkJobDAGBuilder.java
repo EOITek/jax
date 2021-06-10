@@ -35,9 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-// CHECKSTYLE.OFF:
 public class FlinkJobDAGBuilder extends BaseJobDAGBuilder<FlinkJobNode> {
-    // CHECKSTYLE.ON:
 
     private static Logger logger = LoggerFactory.getLogger(FlinkJobDAGBuilder.class);
     private FlinkEnvironment context;

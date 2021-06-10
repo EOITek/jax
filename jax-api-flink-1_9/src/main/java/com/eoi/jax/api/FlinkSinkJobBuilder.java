@@ -20,11 +20,11 @@ package com.eoi.jax.api;
  * <p>实现类需要具体声明 IN, OUT 和 C 的类型，这至关重要。整个编排器将相对严格的校验各个job之间的串联能否做到类型匹配，
  * 从而通过静态检查规避一些由于类型不匹配而带来的运行时问题。
  *
- * @param <I> 声明输入类型，一般是DataStream或Table，如果希望定义多输入，使用Tuple。比如Tuple&lt;DataStream, DataStream>
+ * @param <IN> 声明输入类型，一般是DataStream或Table，如果希望定义多输入，使用Tuple。比如Tuple&lt;DataStream, DataStream>
  *             输入类型的声明原则上建议尽量宽泛一些，太严格的类型声明容易造成类型不匹配
  * @param <C>  配置类的类型, {@link Builder} 接口中的 configure 负责产生这个配置类
  */
-public interface FlinkSinkJobBuilder<I, C> extends StreamingSinkBuilder<I, C> {
+public interface FlinkSinkJobBuilder<IN, C> extends StreamingSinkBuilder<IN, C> {
     /**
      * build方法用于通过context, in和config，构建出可向下游传递的对象
      *
@@ -34,5 +34,5 @@ public interface FlinkSinkJobBuilder<I, C> extends StreamingSinkBuilder<I, C> {
      * @param metaConfig job的元数据信息，包含jobId, jobEntry等信息。
      * @throws Exception 如果出现严重错误，请抛出异常
      */
-    void build(FlinkEnvironment context, I in, C config, JobMetaConfig metaConfig) throws Throwable;
+    void build(FlinkEnvironment context, IN in, C config, JobMetaConfig metaConfig) throws Throwable;
 }

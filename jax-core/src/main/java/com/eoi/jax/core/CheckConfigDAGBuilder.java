@@ -29,9 +29,7 @@ import java.util.List;
 /**
  * this implementation of DAGVisitor only run the validate() of the Job witch support ConfigValidatable call check() to visit DAG and run validate()
  */
-// CHECKSTYLE.OFF:
 public class CheckConfigDAGBuilder extends AbstractDAGVisitor<CheckConfigNode> {
-    // CHECKSTYLE.ON:
 
     private List<JobBuildException> invalidations;
     private boolean compatible;

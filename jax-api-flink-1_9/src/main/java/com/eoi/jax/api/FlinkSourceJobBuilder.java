@@ -22,10 +22,10 @@ package com.eoi.jax.api;
  *
  * <p>实现类在build方法中大概率要通过addSource方法返回一个DataStream或者Table
  *
- * @param <O> 声明输出类型。对于输出类型，推荐将类型声明为更具体一些。 例如 DataStream&lt;Map&lt;String, Object>>，虽然大多数情况下声明为DataStream也是可以工作的。 宽泛的输出类型更容易造成类型不匹配
+ * @param <OUT> 声明输出类型。对于输出类型，推荐将类型声明为更具体一些。 例如 DataStream&lt;Map&lt;String, Object>>，虽然大多数情况下声明为DataStream也是可以工作的。 宽泛的输出类型更容易造成类型不匹配
  * @param <C>   配置类的类型, {@link Builder} 接口中的 configure 负责产生这个配置类
  */
-public interface FlinkSourceJobBuilder<O, C> extends StreamingSourceBuilder<O, C> {
+public interface FlinkSourceJobBuilder<OUT, C> extends StreamingSourceBuilder<OUT, C> {
 
     /**
      * build方法用于通过context和config，构建出可向下游传递的对象
@@ -36,5 +36,5 @@ public interface FlinkSourceJobBuilder<O, C> extends StreamingSourceBuilder<O, C
      * @return 可向下游传递的对象，通常是DataStream或者Table
      * @throws Exception 如果出现严重错误，请抛出异常
      */
-    O build(FlinkEnvironment context, C config, JobMetaConfig metaConfig) throws Throwable;
+    OUT build(FlinkEnvironment context, C config, JobMetaConfig metaConfig) throws Throwable;
 }

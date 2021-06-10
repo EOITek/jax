@@ -14,6 +14,6 @@
 
 package com.eoi.jax.api;
 
-public interface StreamingProcessBuilder<I, O, C> extends Builder<C> {
+public interface StreamingProcessBuilder<IN, OUT, C> extends Builder<C> {
     boolean compatibleWithLastConfig(C lastConfig, C currentConfig);
 }

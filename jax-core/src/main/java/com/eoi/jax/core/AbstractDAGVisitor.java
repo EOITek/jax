@@ -33,9 +33,7 @@ import java.util.Set;
  *
  * @param <N> 继承类需要定义的DAG的节点类型
  */
-// CHECKSTYLE.OFF:
 public abstract class AbstractDAGVisitor<N extends AbstractDAGNode> {
-    // CHECKSTYLE.ON:
 
     /**
      * 保存节点间的后继关系，key为当前节点编号，value是当前节点的所有后继节点

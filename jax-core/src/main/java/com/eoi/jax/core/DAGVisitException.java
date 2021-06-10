@@ -14,9 +14,7 @@
 
 package com.eoi.jax.core;
 
-// CHECKSTYLE.OFF:
 public class DAGVisitException extends Exception {
-    // CHECKSTYLE.ON:
 
     DAGVisitException() {
     }

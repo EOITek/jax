@@ -14,5 +14,5 @@
 
 package com.eoi.jax.api;
 
-public interface StreamingSinkBuilder<I, C> extends Builder<C> {
+public interface StreamingSinkBuilder<IN, C> extends Builder<C> {
 }

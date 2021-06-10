@@ -14,5 +14,5 @@
 
 package com.eoi.jax.api;
 
-public interface StreamingSourceBuilder<O, C> extends Builder<C> {
+public interface StreamingSourceBuilder<OUT, C> extends Builder<C> {
 }
