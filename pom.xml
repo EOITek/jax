@@ -13,6 +13,7 @@
         <module>jax-core</module>
         <module>jax-common</module>
         <module>jax-api-flink-1_9</module>
+        <module>jax-flink-entry-1_9</module>
     </modules>
 
     <name>jax-root</name>
@@ -201,6 +202,11 @@
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-core</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-http</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
             <dependency>
