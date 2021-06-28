@@ -15,6 +15,7 @@
         <module>jax-api-flink-1_9</module>
         <module>jax-flink-entry-1_9</module>
         <module>jax-manager</module>
+        <module>jax-web</module>
     </modules>
 
     <name>jax-root</name>
@@ -41,6 +42,8 @@
         <scala.version>2.11.12</scala.version>
         <scala.binary.version>2.11</scala.binary.version>
         <parser.combinators.version>1.1.1</parser.combinators.version>
+        <joda.version>2.9.9</joda.version>
+        <guava.version>20.0</guava.version>
         <hutool.version>5.1.0</hutool.version>
         <beanutils.version>1.9.4</beanutils.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -49,6 +52,10 @@
         <spark.version>2.4.1</spark.version>
         <exec.version>1.3</exec.version>
         <hadoop.version>2.10.0</hadoop.version>
+        <mybatis.version>3.5.6</mybatis.version>
+        <mybatis-plus.version>3.1.2</mybatis-plus.version>
+        <mysql.version>8.0.17</mysql.version>
+        <flyway.version>5.2.4</flyway.version>
     </properties>
 
     <dependencyManagement>
@@ -207,16 +214,31 @@
                 <artifactId>hadoop-client</artifactId>
                 <version>${hadoop.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-core</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-http</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
@@ -234,6 +256,31 @@
                 <artifactId>Java-WebSocket</artifactId>
                 <version>${java-webSocket.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

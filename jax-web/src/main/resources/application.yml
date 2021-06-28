@@ -1,0 +1,136 @@
+server:
+  port: 9999
+  advertised:
+    address:
+    port:
+jax:
+  serverId: 1
+  mode: standalone
+  home: ${JAX_HOME}
+  work: ${jax.home}/jax/work
+  jarTmp: ${jax.home}/jax/jar_tmp
+  jarLib: ${jax.home}/jax/jar_lib
+  jarDir: ${jax.home}/jax/jar_dir
+  jarHdfsDir: /jax/jar_dir
+  corsEnabled: false
+  buildin:
+    jobJarDir: ${jax.home}/jax/buildin/jobjar
+    pipelineDir: ${jax.home}/jax/buildin/pipeline
+  website:
+    root: ${jax.home}/jax/www
+    index: ${jax.website.root}/index.html
+  thread:
+    flinkScheduleCron: 0/1 * * * * ?
+    flinkThreadPoolSize: 4
+    sparkScheduleCron: 0/1 * * * * ?
+    sparkThreadPoolSize: 4
+    statusStartingScheduleCron: 0/5 * * * * ?
+    statusStartingThreadPoolSize: 4
+    statusStoppingScheduleCron: 0/5 * * * * ?
+    statusStoppingThreadPoolSize: 4
+    statusRunningScheduleCron: 0 * * * * ?
+    statusRunningThreadPoolSize: 1
+    statusFailedScheduleCron: 0 * * * * ?
+    statusFailedThreadPoolSize: 1
+    statusStoppedScheduleCron: 0 * * * * ?
+    statusStoppedThreadPoolSize: 1
+    statusStopFailedScheduleCron: 0 * * * * ?
+    statusStopFailedThreadPoolSize: 1
+    marayarnSubmitThreadPoolSize: 1
+    marayarnStatusThreadPoolSize: 1
+  websocket:
+    bufferSize: 1048576
+  debug:
+    bin: ${jax.home}/jax/debug/debug.sh
+    entry: com.eoi.jax.flink_entry.FlinkLocalMiniCluster
+    debugSinker: com.eoi.jax.core.flink.debug.WebsocketDebugSinker
+    debugSource: com.eoi.jax.flink.job.source.WebsocketSourceJob
+    # python运行环境
+    pythonEnv: /home/python_venv
+    sparkBin: ${jax.home}/jax/debug/spark-debug.sh
+    sparkEntry: com.eoi.jax.spark_entry.SparkLocalMiniCluster
+    sparkDebugSinker: com.eoi.jax.core.spark.debug.WebsocketDebugSinker
+    # message限速器(1000tps)
+    messageRateLimitTps: 1000
+  tool:
+    jaxToolBin: ${jax.home}/jax/tool/jax-tool.sh
+    jaxToolTimeoutMillis: 60000
+
+spring:
+  application:
+    name: jax
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  resources:
+    static-locations:
+      - file:${jax.website.root}
+  datasource:
+    # JDBC连接串
+    url: jdbc:mysql://localhost:3306/jax_db?characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    # JDBC用户
+    username: root
+    # JDBC密码
+    password: User@123
+    # JDBC使用Hikari连接池
+    type: com.zaxxer.hikari.HikariDataSource
+    # hikari连接池配置信息
+    hikari:
+      pool-name: JaxMysqlDatasourePool
+      # 自动提交从池中返回的连接
+      auto-commit: true
+      # 客户端等待连接池连接的最大毫秒数
+      connection-timeout: 30000
+      # 连接允许在池中闲置的最长时间
+      idle-timeout: 30000
+      # 池中连接最长生命周期
+      max-lifetime: 1800000
+      # 连接池中维护的最小空闲连接数
+      minimum-idle: 4
+      # 池中最大连接数，包括闲置和使用中的连接
+      maximum-pool-size: 16
+      # 用来检测连接是否有效，要求是一个查询语句
+      connection-test-query: SELECT 1
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: JaxClusterScheduler
+            instanceId: ${jax.serverId}
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            misfireThreshold: 600000
+            useProperties: false
+            txIsolationLevelReadCommitted: true
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            # This specifies the number of threads that are available for concurrent execution of jobs.
+            threadCount: 5
+            # This is used to specify the priority that the worker threads run at. The value can be any integer between 1 and 10. The default is 5, which equates to THRead.NORM_PRIORITY
+            threadPriority: 5
+            # Set this to true to have the threads in the pool created as daemon threads. The default is false.
+            makeThreadsDaemons: false
+            # Set this to true if you want new threads to inherit the group of its parent thread. The default is true.
+            threadsInheritGroupOfInitializingThread: true
+            # Set this to true if you want new threads to inherit the Classloader of the parent creating thread. The default is false.
+            threadsInheritContextClassLoaderOfInitializingThread: true
+  flyway:
+    enabled: true
+    ignore-missing-migrations: true
+    ignore-ignored-migrations: true
+    ignore-pending-migrations: true
+    baseline-on-migrate: true
+    baseline-version: 1.0.0
+    baseline-description: Baseline
+    table: _migration
+    locations: classpath:db/migration/mysql
+    placeholder-replacement: false
