@@ -12,8 +12,8 @@
         <module>jax-api</module>
         <module>jax-core</module>
         <module>jax-common</module>
-        <module>jax-api-flink-1_9</module>
-        <module>jax-flink-entry-1_9</module>
+        <module>${jax.api.module}</module>
+        <module>${jax.flink.entry.module}</module>
         <module>jax-manager</module>
         <module>jax-web</module>
         <module>jax-tool</module>
@@ -37,8 +37,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <jackson.version>2.10.5</jackson.version>
         <jackson.databind.version>2.10.5</jackson.databind.version>
-        <flink.table.planner>flink-table-planner_</flink.table.planner>
-        <jax.api.module>jax-api-1_9</jax.api.module>
         <java-webSocket.version>1.5.1</java-webSocket.version>
         <scala.version>2.11.12</scala.version>
         <scala.binary.version>2.11</scala.binary.version>
@@ -57,6 +55,13 @@
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
         <mysql.version>8.0.17</mysql.version>
         <flyway.version>5.2.4</flyway.version>
+
+        <!--flink 1.9-->
+        <flink.version>1.9.1</flink.version>
+        <flink.table.planner>flink-table-planner_</flink.table.planner>
+        <jax.flink.jdbc.module>flink-jdbc</jax.flink.jdbc.module>
+        <jax.api.module>jax-api-flink-1_9</jax.api.module>
+        <jax.flink.entry.module>jax-flink-entry-1_9</jax.flink.entry.module>
     </properties>
 
     <dependencyManagement>
@@ -403,4 +408,17 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>flink12</id>
+            <properties>
+                <flink.version>1.12.3</flink.version>
+                <flink.table.planner>flink-table-planner-blink_</flink.table.planner>
+                <jax.flink.job.version.module>jax-flink-1_12-job</jax.flink.job.version.module>
+                <jax.api.module>jax-api-flink-1_12</jax.api.module>
+                <jax.flink.entry.module>jax-flink-entry-1_12</jax.flink.entry.module>
+            </properties>
+        </profile>
+    </profiles>
 </project>
