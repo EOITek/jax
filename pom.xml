@@ -17,6 +17,8 @@
         <module>jax-manager</module>
         <module>jax-web</module>
         <module>jax-tool</module>
+        <module>jax-flink-job</module>
+        <module>jax-flink-job-common</module>
     </modules>
 
     <name>jax-root</name>
@@ -55,6 +57,8 @@
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
         <mysql.version>8.0.17</mysql.version>
         <flyway.version>5.2.4</flyway.version>
+        <aviator.version>5.2.2</aviator.version>
+        <joda.version>2.9.9</joda.version>
 
         <!--flink 1.9-->
         <flink.version>1.9.1</flink.version>
@@ -238,10 +242,14 @@
                 <artifactId>hutool-core</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-http</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-crypto</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
 
@@ -254,6 +262,16 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-exec</artifactId>
                 <version>${exec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.aviator</groupId>
+                <artifactId>aviator</artifactId>
+                <version>${aviator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda.version}</version>
             </dependency>
 
             <!-- WebSocket -->
