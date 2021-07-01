@@ -72,7 +72,7 @@ spring:
     # JDBC用户
     username: root
     # JDBC密码
-    password: User@123
+    password: Pass@Mysql
     # JDBC使用Hikari连接池
     type: com.zaxxer.hikari.HikariDataSource
     # hikari连接池配置信息
