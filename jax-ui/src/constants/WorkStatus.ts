@@ -1,0 +1,15 @@
+export const WorkStatus = {
+  Suspended : '挂起',
+  Scaling : '分配中',
+  Running : '运行中',
+  Starting : '启动中',
+  Ready : '草稿',
+  StartSubmitting : '提交中',
+  restartStopping : '重启中',
+  Destroying : '删除中',
+  Stopped : '停止',
+  Failed : '失败',
+  StartFailed : '启动失败',
+  Connecting : '重连中',
+  LoseConnect : '连接丢失',
+};

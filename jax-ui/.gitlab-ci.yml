@@ -1,0 +1,17 @@
+# http://docs.gitlab.com/ce/ci/yaml/
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+build:
+  script:
+    - make install
+    - make build
+    - cp -r dist/* /opt/middle-end
+    - make tar
+  only:
+    - master@fe/middle-end
+    - tags@fe/middle-end
+  artifacts:
+    name: "${CI_PROJECT_NAME}-web-${CI_COMMIT_REF_SLUG}"
+    paths:
+      - middle_end-*.tar.gz

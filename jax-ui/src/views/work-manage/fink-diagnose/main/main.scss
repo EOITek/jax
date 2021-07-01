@@ -1,0 +1,26 @@
+::v-deep .el-card__body {
+  padding: 0;
+}
+
+.status {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: red;
+}
+
+.card {
+  border: 1px solid #eee;
+  padding: 10px;
+  width: 100%;
+}
+
+.log-diagnose {
+  overflow-y: auto;
+  margin: 10px 0 10px 10px;
+}
+
+.error-message {
+  max-height: 500px;
+  overflow-y: auto;
+}

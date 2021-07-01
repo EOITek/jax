@@ -1,0 +1,12 @@
+.model {
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border: 1px #eee solid;
+  border-radius: 2px;
+
+  &.active {
+    background-color: $primary-color;
+    color: #fff;
+  }
+}

@@ -1,0 +1,91 @@
+.sharp-selector-next {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 22px 0 8px;
+  min-height: 32px;
+  background: #fff;
+  position: relative;
+
+  &:focus {
+    border-color: $primary-color;
+  }
+
+  .ss-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 6px;
+    border: 1px solid #e8eaec;
+    border-radius: 3px;
+    color: #4A4A4A;
+    background: #f7f7f7;
+    font-size: 12px;
+    vertical-align: middle;
+    height: 24px;
+    margin: 3px 8px 3px 0;
+    max-width: calc(100% - 37px);
+    line-height: normal;
+
+    .el-icon-close {
+      margin-left: 3px;
+      height: 10px;
+    }
+
+    ::v-deep .el-input--mini {
+      .el-input__inner {
+        height: 20px;
+        line-height: 20px;
+        padding: 0 8px;
+      }
+
+      .el-input__icon {
+        line-height: 20px;
+      }
+    }
+
+    .ss-tag-text {
+      display: flex;
+      align-items: center;
+      color: #4A4A4A;
+      font-size: 12px;
+      flex: 1;
+      cursor: pointer;
+
+      i {
+        margin-left: 3px;
+      }
+
+      > span {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+
+  ::v-deep .el-input--mini {
+    .el-input__inner {
+      height: 24px;
+      line-height: 24px;
+    }
+
+    .el-input__icon {
+      line-height: 24px;
+    }
+  }
+
+  .clear {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

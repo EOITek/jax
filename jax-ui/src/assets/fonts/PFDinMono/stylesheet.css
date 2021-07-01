@@ -1,0 +1,143 @@
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-XThin.eot');
+    src: local('☞PFDinMono-XThin'), local('PFDinMono-XThin'),
+        url('PFDinMono-XThin.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-XThin.woff2') format('woff2'),
+        url('PFDinMono-XThin.woff') format('woff'),
+        url('PFDinMono-XThin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-ThinItalic.eot');
+    src: local('☞PFDinMono-ThinItalic'), local('PFDinMono-ThinItalic'),
+        url('PFDinMono-ThinItalic.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-ThinItalic.woff2') format('woff2'),
+        url('PFDinMono-ThinItalic.woff') format('woff'),
+        url('PFDinMono-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-Italic.eot');
+    src: local('☞PFDinMono-Italic'), local('PFDinMono-Italic'),
+        url('PFDinMono-Italic.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-Italic.woff2') format('woff2'),
+        url('PFDinMono-Italic.woff') format('woff'),
+        url('PFDinMono-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-Regular.eot');
+    src: local('☞PFDinMono-Regular'), local('PFDinMono-Regular'),
+        url('PFDinMono-Regular.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-Regular.woff2') format('woff2'),
+        url('PFDinMono-Regular.woff') format('woff'),
+        url('PFDinMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-XThinItalic.eot');
+    src: local('☞PFDinMono-XThinItalic'), local('PFDinMono-XThinItalic'),
+        url('PFDinMono-XThinItalic.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-XThinItalic.woff2') format('woff2'),
+        url('PFDinMono-XThinItalic.woff') format('woff'),
+        url('PFDinMono-XThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-Bold.eot');
+    src: local('☞PFDinMono-Bold'), local('PFDinMono-Bold'),
+        url('PFDinMono-Bold.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-Bold.woff2') format('woff2'),
+        url('PFDinMono-Bold.woff') format('woff'),
+        url('PFDinMono-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-BoldItalic.eot');
+    src: local('☞PFDinMono-BoldItalic'), local('PFDinMono-BoldItalic'),
+        url('PFDinMono-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-BoldItalic.woff2') format('woff2'),
+        url('PFDinMono-BoldItalic.woff') format('woff'),
+        url('PFDinMono-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-Medium.eot');
+    src: local('☞PFDinMono-Medium'), local('PFDinMono-Medium'),
+        url('PFDinMono-Medium.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-Medium.woff2') format('woff2'),
+        url('PFDinMono-Medium.woff') format('woff'),
+        url('PFDinMono-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-Light.eot');
+    src: local('☞PFDinMono-Light'), local('PFDinMono-Light'),
+        url('PFDinMono-Light.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-Light.woff2') format('woff2'),
+        url('PFDinMono-Light.woff') format('woff'),
+        url('PFDinMono-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-MediumItalic.eot');
+    src: local('☞PFDinMono-MediumItalic'), local('PFDinMono-MediumItalic'),
+        url('PFDinMono-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-MediumItalic.woff2') format('woff2'),
+        url('PFDinMono-MediumItalic.woff') format('woff'),
+        url('PFDinMono-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-Thin.eot');
+    src: local('☞PFDinMono-Thin'), local('PFDinMono-Thin'),
+        url('PFDinMono-Thin.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-Thin.woff2') format('woff2'),
+        url('PFDinMono-Thin.woff') format('woff'),
+        url('PFDinMono-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PFDinMono';
+    src: url('PFDinMono-LightItalic.eot');
+    src: local('☞PFDinMono-LightItalic'), local('PFDinMono-LightItalic'),
+        url('PFDinMono-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('PFDinMono-LightItalic.woff2') format('woff2'),
+        url('PFDinMono-LightItalic.woff') format('woff'),
+        url('PFDinMono-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}

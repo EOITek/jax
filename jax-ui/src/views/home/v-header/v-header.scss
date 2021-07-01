@@ -1,0 +1,16 @@
+.v-default-header {
+  background: #07002A;
+  height: 42px;
+  width: 100%;
+  display: flex;
+  color: white;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+}
+
+.logo-box {
+  width: 180px;
+  margin-left: 15px;
+  background: url("~@images/logo-w.svg") no-repeat center;
+  background-size: contain;
+}

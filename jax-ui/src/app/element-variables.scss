@@ -1,0 +1,39 @@
+@import "~@/common/app/element-variables";
+
+.el-message-box__message > p,
+.el-tooltip__popper {
+  white-space: pre-line;
+}
+
+// form 必填项*位置修改
+.el-form-item {
+  &.is-required:not(.is-no-asterisk)  {
+    & > .el-form-item__label {
+      &:before {
+        display: none;
+      }
+
+      &:after {
+        content: '*';
+        color: #F56C6C;
+      }
+    }
+  }
+
+  .el-form-item__label, .el-form-item__content, .el-radio__label, .el-checkbox__label {
+    font-size: 13px;
+  }
+}
+
+.sharp-drawer__body{
+  padding: 10px !important;
+}
+
+// TODO 现在这边改掉, 后面再组件内部改完后去掉
+.el-drawer__wrapper {
+  pointer-events: none;
+
+  .el-drawer {
+    pointer-events: auto;
+  }
+}

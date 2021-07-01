@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="153px" height="21px" viewBox="0 0 153 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52 (66869) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 16</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="job列表" transform="translate(-16.000000, -11.000000)">
+            <g id="Group-16" transform="translate(16.000000, 10.000000)">
+                <text id="夏洛克-copy-3" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#FFFFFF">
+                    <tspan x="25" y="16">夏洛克</tspan>
+                </text>
+                <text id="数字运维中台" font-family="PingFangSC-Light, PingFang SC" font-size="14" font-weight="300" fill="#FFFFFF" fill-opacity="0.853515625">
+                    <tspan x="69" y="16">数字运维中台</tspan>
+                </text>
+                <g id="Group-15-Copy">
+                    <polygon id="Polygon" fill="#F59323" points="9.25935754 6.66346154 13.3665677 8.99567308 13.3665677 13.6600962 9.25935754 15.9923077 5.1521474 13.6600962 5.1521474 8.99567308"></polygon>
+                    <polygon id="Path-5" fill="#F59323" points="7.72530659 6.15233529 3.76002322 8.36401563 3.76002322 18.8798077 -1.98951966e-13 16.7054112 -1.98951966e-13 6.40889998 4.10961839 3.99807692"></polygon>
+                    <polygon id="Path-5-Copy-2" fill="#F59323" transform="translate(11.734408, 7.018575) rotate(-240.000000) translate(-11.734408, -7.018575) " points="15.5483782 1.74473163 11.5591549 4.03989172 11.4307112 14.464231 7.99506559 12.3617902 7.92043874 1.94938136 12.026636 -0.427081791"></polygon>
+                    <polygon id="Path-5-Copy-3" fill="#F59323" transform="translate(11.592911, 15.998164) rotate(-120.000000) translate(-11.592911, -15.998164) " points="15.4966513 10.7068657 11.3331599 13.1677568 11.604172 23.4449915 7.96506222 21.3439505 7.68917033 11.0638985 11.9412964 8.55133585"></polygon>
+                    <polygon id="Path-6" fill="#DD6400" points="13.3950287 13.6622175 9.25935754 15.9954897 9.25935754 11.3289453 13.3950287 8.99567308"></polygon>
+                    <polygon id="Path-6-Copy-3" fill="#DD6400" points="18.0364223 16.4517983 9.25935754 21.8460347 9.25935754 17.6592338 18.0364223 12.2649973"></polygon>
+                    <polygon id="Path-6-Copy-2" fill="#DD6400" points="18.0364223 10.9955469 14.4016503 12.9629603 14.4016503 8.33402343 18.0364223 6.25655956"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

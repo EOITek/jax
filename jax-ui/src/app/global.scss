@@ -1,0 +1,121 @@
+@import "~@/common/app/global";
+
+:root {
+  --source-color--: #B581E4;
+  --process-color--: #13A9FA;
+  --sink-color--: #FE5AA8;
+  --share-color--: #67c23a;
+}
+
+html, body {
+  min-width: 1000px;
+}
+
+a {
+  color: inherit;
+}
+
+.text-pre-wrap { white-space: pre-wrap; }
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+.rotating {
+  display: inline-block;
+  animation: .5s rotate infinite linear;
+}
+
+.fa-question-circle-o {
+  cursor: help;
+}
+
+.fc-yellow {
+  color: #F8E71C !important;
+}
+
+body {
+  background-color: transparent;
+}
+
+body[data-page] {
+  background-color: #eaeef4;
+}
+
+[data-page=overview] {
+  background-color: transparent !important;
+}
+
+.font-din {
+  font-family: PFDinMono, monospace;
+}
+
+.flex-wrap {
+  @extend .flex;
+  flex-wrap: wrap;
+}
+
+.main-content {
+  @extend .main-content;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.bg-source {
+  background-color: var(--source-color--);
+}
+
+.bg-process {
+  background-color: var(--process-color--);
+}
+
+.bg-sink {
+  background-color: var(--sink-color--);
+}
+
+.bg-share {
+  background-color: var(--share-color--);
+}
+
+@each $i, $color in (1:  #fafafa, 2: #E6E6E6, 3: #DBDBDB) {
+  .bg-neutrals-#{$i} {
+    background-color: #{$color}
+  }
+}
+
+.markdown-html pre {
+  margin: 10px 0;
+  padding: 1rem;
+  max-height: 35rem;
+  line-height: 1.5;
+  background-color: #f5f2f0;
+  overflow: auto;
+}
+
+.markdown-html code {
+  font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+  padding: .2em;
+  margin: 0;
+  font-size: .85em;
+  background-color: #f7f7f7;
+}
+
+.markdown-html p, .markdown-html ol, .markdown-html li {
+  margin: 10px 0;
+}
+
+.el-tree-node__loading-icon {
+  display: none;
+}
+
+.select-none {
+  user-select: none;
+}
+
+.card-wrap {
+  --min-width: 100px;
+  --repeat-num: auto-fill;
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(var(--repeat-num), minmax(var(--min-width), 1fr));
+}

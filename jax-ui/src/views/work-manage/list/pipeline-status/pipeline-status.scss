@@ -1,0 +1,24 @@
+.pipeline-status {
+  display: inline-block;
+  font-size: 12px;
+  width: 62px;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 2px;
+  line-height: 1.5;
+
+  &[data-value=WAITING_START], &[data-value=STARTING], &[data-value=RUNNING], &[data-value=RESTARTING], &[data-value=FINISHED] {
+    color: #7EC42C;
+    background: #F9F9F9;
+  }
+
+  &[data-value=WAITING_STOP], &[data-value=STOPPING], &[data-value=STOPPED], &[data-value=DELETING] {
+    color: #F5A623;
+    background: rgba(245,166,35,0.10);
+  }
+
+  &[data-value=START_FAILED], &[data-value=STOP_FAILED], &[data-value=FAILED] {
+    color: #C82929;
+    background: rgba(245,166,35,0.10);
+  }
+}

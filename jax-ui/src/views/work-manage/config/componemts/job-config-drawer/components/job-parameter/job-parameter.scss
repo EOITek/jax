@@ -1,0 +1,43 @@
+.el-form-item {
+  margin-bottom: 0;
+  padding-bottom: 16px;
+}
+
+::v-deep .el-form-item__label {
+  width: 100%;
+  padding: 0;
+}
+
+::v-deep .el-form-item__content {
+  width: 100%;
+}
+
+::v-deep .el-form-item__error {
+  padding-left: 10px;
+}
+
+.label{
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  line-height: 32px;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.object-box {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
+.list-box {
+  border-bottom: 1px #E6E6E6 solid;
+  padding-bottom: 0;
+}
+
+.complex-type {
+  width: calc(100% - 10px);
+  min-width: fit-content;
+}

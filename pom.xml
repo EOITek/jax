@@ -313,6 +313,7 @@
                             <exclude>.editorconfig</exclude>
                             <exclude>.gitignore</exclude>
                             <exclude>mvnw.cmd</exclude>
+                            <exclude>jax-ui/**</exclude>
                         </excludes>
                         <mapping>
                             <java>SLASHSTAR_STYLE</java>
