@@ -16,6 +16,7 @@
         <module>jax-flink-entry-1_9</module>
         <module>jax-manager</module>
         <module>jax-web</module>
+        <module>jax-tool</module>
     </modules>
 
     <name>jax-root</name>
