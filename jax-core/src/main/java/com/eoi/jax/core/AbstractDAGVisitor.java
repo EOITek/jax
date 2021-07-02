@@ -141,8 +141,9 @@ public abstract class AbstractDAGVisitor<N extends AbstractDAGNode> {
                 children.add(value);
             } else {
                 if (children.size() < order) {
+                    int emptyCount = order - children.size();
                     // 如果children的size比order还小，说明order插入顺序不是从大到小的，这个时候需要补null
-                    for (int i = 0; i < order - children.size(); i++) {
+                    for (int i = 0; i < emptyCount; i++) {
                         children.add(null);
                     }
                     children.add(order, value);
@@ -235,8 +236,12 @@ public abstract class AbstractDAGVisitor<N extends AbstractDAGNode> {
         List parentList = new ArrayList();
         for (int i = 0; i < parents.size(); i++) {
             Tuple2<N, Integer> parent = parents.get(i);
-            List r = visitNode(parent.f0.getId());
-            parentList.add(r.get(parent.f1));
+            if (parent != null) {
+                List r = visitNode(parent.f0.getId());
+                parentList.add(r.get(parent.f1));
+            } else {
+                parentList.add(null);
+            }
         }
         List r = visit(getNodeById(nodeId), parentList);
         cachedVisitResults.put(nodeId, r);
@@ -262,7 +267,8 @@ public abstract class AbstractDAGVisitor<N extends AbstractDAGNode> {
     }
 
     /**
-     * 继承类需要实现的方法，采用visit模式 每次访问图中的某个节点都会调用这个方法，传入当前被访问的节点对象，以及前驱节点的访问结果，需返回一个结果对象 可参考 {@link FlinkJobDAGBuilder} 相关的测试方法和测试类
+     * 继承类需要实现的方法，采用visit模式 每次访问图中的某个节点都会调用这个方法，传入当前被访问的节点对象，以及前驱节点的访问结果，需返回一个结果对象
+     * 可参考 {@link FlinkJobDAGBuilder} 相关的测试方法和测试类
      *
      * @param node    当前被访问的节点的Node对象
      * @param parents 已经遍历的前驱节点并得到结果的对象

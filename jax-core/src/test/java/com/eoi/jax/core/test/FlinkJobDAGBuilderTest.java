@@ -102,6 +102,44 @@ public class FlinkJobDAGBuilderTest {
     }
 
     @Test
+    public void flinkJobBuilderTest_4() throws Throwable {
+        FlinkEnvironment context = basicContext();
+        FlinkJobDAGBuilder flinkJobDAGBuilder = new FlinkJobDAGBuilder(context);
+
+        FlinkJobNode sourceNode = new FlinkJobNode();
+        sourceNode.setId("1").setEntry(TestSourceJob.class.getName());
+        FlinkJobNode processNode1 = new FlinkJobNode();
+        processNode1.setId("2").setEntry(TestProcessJob3.class.getName());
+        FlinkJobNode sinkNode = new FlinkJobNode();
+        sinkNode.setId("3").setEntry(TestSinkJob.class.getName());
+
+        flinkJobDAGBuilder.putEdge(sourceNode, processNode1, 0, 2);
+        flinkJobDAGBuilder.putEdge(processNode1, sinkNode);
+        flinkJobDAGBuilder.getChain();
+    }
+
+    @Test
+    public void flinkJobBuilderTest_5() throws Throwable {
+        FlinkEnvironment context = basicContext();
+        FlinkJobDAGBuilder flinkJobDAGBuilder = new FlinkJobDAGBuilder(context);
+
+        FlinkJobNode sourceNode = new FlinkJobNode();
+        sourceNode.setId("1").setEntry(TestSourceJob.class.getName());
+        FlinkJobNode sourceNode2 = new FlinkJobNode();
+        sourceNode2.setId("1_1").setEntry(TestSourceJob.class.getName());
+        FlinkJobNode processNode1 = new FlinkJobNode();
+        processNode1.setId("2").setEntry(TestProcessJob3.class.getName());
+        FlinkJobNode sinkNode = new FlinkJobNode();
+        sinkNode.setId("3").setEntry(TestSinkJob.class.getName());
+
+        flinkJobDAGBuilder.putEdge(sourceNode, processNode1);
+        flinkJobDAGBuilder.putEdge(sourceNode2, processNode1, 0, 2);
+        flinkJobDAGBuilder.putEdge(processNode1, sinkNode);
+        flinkJobDAGBuilder.getChain();
+    }
+
+
+    @Test
     public void flinkJobBuilderTest_debug() throws Throwable {
         FlinkEnvironment context = basicContext();
         FlinkJobDAGBuilder flinkJobDAGBuilder = new FlinkJobDAGBuilder(context);

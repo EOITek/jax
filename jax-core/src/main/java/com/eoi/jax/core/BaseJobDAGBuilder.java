@@ -79,11 +79,12 @@ public abstract class BaseJobDAGBuilder<C extends BaseJobNode> extends AbstractD
             //    throw new InvalidTopologyException(node, "the number of upstream is different from what is needed");
             //}
             for (int i = 0; i < requiredTypes.length; i++) {
+                boolean isEmptyInput = i >= inputObjects.size() || inputObjects.get(i) == null;
                 // parent的对象类型不是声明的类型或子类
-                if (!checkResult(inputObjects, i, requiredTypes[i])) {
+                if (!isEmptyInput && !checkResult(inputObjects, i, requiredTypes[i])) {
                     throw new InvalidTopologyException(node, "one of upstream type does not meet the requirements");
                 }
-                if (i >= inputObjects.size()) {
+                if (isEmptyInput) {
                     tupleParents.setField(null, i);
                 } else {
                     tupleParents.setField(((VisitResult) inputObjects.get(i)).resultObject, i);

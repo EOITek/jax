@@ -142,6 +142,17 @@ public class AbstractDAGVisitorMultiSlotTest {
         Assert.assertEquals("020435", ((List) results.get(0)).get(0));
     }
 
+    @Test
+    public void test_AbstractDAGVisitorMultiSlotTest_4() throws Throwable {
+        MultiSlotDAGNode node1 = new MultiSlotDAGNode("1", p -> Arrays.asList("1"));
+        MultiSlotDAGNode node2 = new MultiSlotDAGNode("2", p -> Arrays.asList(p.get(2).toString() + "2"));
+
+        MultiSlotDAGVisitor visitor = new MultiSlotDAGVisitor();
+        visitor.putEdge(node1, node2, 0, 2);
+        List results = visitor.getChain();
+        Assert.assertEquals("12", ((List) results.get(0)).get(0));
+    }
+
     static class MultiSlotDAGNode extends AbstractDAGNode {
 
         private String id;
