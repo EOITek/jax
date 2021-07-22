@@ -15,11 +15,13 @@
 package com.eoi.jax.api;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class JobMetaConfig implements Serializable {
     private String pipelineName;
     private String jobId;
     private String jobEntry;
+    private Map<String, Object> opts;
 
     public String getPipelineName() {
         return pipelineName;
@@ -45,6 +47,14 @@ public class JobMetaConfig implements Serializable {
         this.jobEntry = jobEntry;
     }
 
+    public Map<String, Object> getOpts() {
+        return opts;
+    }
+
+    public void setOpts(Map<String, Object> opts) {
+        this.opts = opts;
+    }
+
     public JobMetaConfig(String jobId, String jobEntry) {
         this.jobId = jobId;
         this.jobEntry = jobEntry;
@@ -54,5 +64,12 @@ public class JobMetaConfig implements Serializable {
         this.jobId = jobId;
         this.jobEntry = jobEntry;
         this.pipelineName = pipelineName;
+    }
+
+    public JobMetaConfig(String jobId, String jobEntry, String pipelineName, Map<String, Object> opts) {
+        this.jobId = jobId;
+        this.jobEntry = jobEntry;
+        this.pipelineName = pipelineName;
+        this.opts = opts;
     }
 }

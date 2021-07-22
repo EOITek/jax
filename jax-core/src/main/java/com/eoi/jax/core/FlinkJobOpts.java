@@ -17,10 +17,19 @@ package com.eoi.jax.core;
 import java.util.Map;
 
 public class FlinkJobOpts {
-
     private Boolean enableDebug;
     private String debugEntry;
     private Map<String, Object> debugConfig;
+
+    /**
+     * Flink 算子高级配置
+     * 参考： https://doc.eoitek.net/pages/viewpage.action?pageId=19908592
+     */
+    private String slotSharingGroup;
+    private String chainingStrategy;
+    private Long bufferTimeout;
+    private Integer parallelism;
+    private Integer maxParallelism;
 
     public FlinkJobOpts() {
         enableDebug = false;
@@ -50,5 +59,45 @@ public class FlinkJobOpts {
 
     public void setDebugConfig(Map<String, Object> debugConfig) {
         this.debugConfig = debugConfig;
+    }
+
+    public String getSlotSharingGroup() {
+        return slotSharingGroup;
+    }
+
+    public void setSlotSharingGroup(String slotSharingGroup) {
+        this.slotSharingGroup = slotSharingGroup;
+    }
+
+    public String getChainingStrategy() {
+        return chainingStrategy;
+    }
+
+    public void setChainingStrategy(String chainingStrategy) {
+        this.chainingStrategy = chainingStrategy;
+    }
+
+    public Long getBufferTimeout() {
+        return bufferTimeout;
+    }
+
+    public void setBufferTimeout(Long bufferTimeout) {
+        this.bufferTimeout = bufferTimeout;
+    }
+
+    public Integer getParallelism() {
+        return parallelism;
+    }
+
+    public void setParallelism(Integer parallelism) {
+        this.parallelism = parallelism;
+    }
+
+    public Integer getMaxParallelism() {
+        return maxParallelism;
+    }
+
+    public void setMaxParallelism(Integer maxParallelism) {
+        this.maxParallelism = maxParallelism;
     }
 }
