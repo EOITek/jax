@@ -46,7 +46,7 @@
     <dependency>
       <groupId>com.eoi</groupId>
       <artifactId>jax-flink-job-common</artifactId>
-        <version>${project.version}</version>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
