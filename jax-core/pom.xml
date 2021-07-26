@@ -107,4 +107,16 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>flink12</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.flink</groupId>
+                    <artifactId>flink-clients_2.11</artifactId>
+                    <version>${flink.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>

@@ -22,9 +22,15 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 8
-      - name: Maven Checks
+      - name: Maven Checks Flink1.9
         run: |
           ./mvnw validate
-      - name: Maven Tests
+      - name: Maven Checks Flink1.12
         run: |
-          ./mvnw test
+          ./mvnw -P flink12 validate
+      - name: Maven Tests Flink1.9
+        run: |
+          ./mvnw clean test
+      - name: Maven Tests Flink1.12
+        run: |
+          ./mvnw -P flink12 clean test
