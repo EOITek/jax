@@ -59,16 +59,21 @@
         <mysql.version>8.0.17</mysql.version>
         <flyway.version>5.2.4</flyway.version>
         <aviator.version>5.2.2</aviator.version>
-        <joda.version>2.9.9</joda.version>
         <csv.version>2.4.0</csv.version>
 
         <!--flink 1.9-->
         <flink.version>1.9.1</flink.version>
         <flink.table.planner>flink-table-planner_</flink.table.planner>
-        <jax.flink.jdbc.module>flink-jdbc</jax.flink.jdbc.module>
         <jax.api.module>jax-api-flink-1_9</jax.api.module>
         <jax.flink.entry.module>jax-flink-entry-1_9</jax.flink.entry.module>
         <jax.flink.job.version.module>jax-flink-job-1_9</jax.flink.job.version.module>
+
+        <!--flink 1.12 idea 无法通过profile切换，只能手动在这里变更成flink1.12-->
+<!--        <flink.version>1.12.3</flink.version>-->
+<!--        <flink.table.planner>flink-table-planner-blink_</flink.table.planner>-->
+<!--        <jax.flink.job.version.module>jax-flink-job-1_12</jax.flink.job.version.module>-->
+<!--        <jax.api.module>jax-api-flink-1_12</jax.api.module>-->
+<!--        <jax.flink.entry.module>jax-flink-entry-1_12</jax.flink.entry.module>-->
     </properties>
 
     <dependencyManagement>
@@ -436,7 +441,7 @@
             <properties>
                 <flink.version>1.12.3</flink.version>
                 <flink.table.planner>flink-table-planner-blink_</flink.table.planner>
-                <jax.flink.job.version.module>jax-flink-1_12-job</jax.flink.job.version.module>
+                <jax.flink.job.version.module>jax-flink-job-1_12</jax.flink.job.version.module>
                 <jax.api.module>jax-api-flink-1_12</jax.api.module>
                 <jax.flink.entry.module>jax-flink-entry-1_12</jax.flink.entry.module>
             </properties>
