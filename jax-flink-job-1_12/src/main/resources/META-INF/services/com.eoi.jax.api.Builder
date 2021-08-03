@@ -1,0 +1,12 @@
+com.eoi.jax.flink1_12.job.source.KafkaByteSourceJob
+com.eoi.jax.flink1_12.job.source.KafkaSourceJob
+com.eoi.jax.flink1_12.job.process.AvroDecoderJob
+com.eoi.jax.flink1_12.job.process.WatermarkJob
+com.eoi.jax.flink1_12.job.process.StreamToTableJob
+com.eoi.jax.flink1_12.job.process.SqlJob
+com.eoi.jax.flink1_12.job.process.TableToStreamJob
+com.eoi.jax.flink1_12.job.process.SqlExecuteJob
+com.eoi.jax.flink1_12.job.sink.KafkaSinkJob
+com.eoi.jax.flink1_12.job.sink.ElasticSearchSinkJob
+com.eoi.jax.flink1_12.job.sink.FileSinkJob
+com.eoi.jax.flink1_12.job.sink.JDBCSinkJob

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{ISO8601} [%thread] %-5level [%logger{100}] [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.apache.hadoop.yarn.client" level="WARN"/>
+    <root level="INFO">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>

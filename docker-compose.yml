@@ -1,0 +1,56 @@
+version: "3"
+services:
+  web:
+    image: jax:1.0.0
+    depends_on:
+      - db
+      - taskmanager
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: my-secret-pw
+    ports:
+      - "9999:9999"
+    volumes:
+      - web-data:/app/jax/jar_dir
+    networks:
+      - jax
+  taskmanager:
+    image: ${FLINK_IMAGE:-flink:1.9.1-scala_2.11}
+    command: taskmanager
+    depends_on:
+      - jobmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 4
+    networks:
+      - jax
+  jobmanager:
+    image: ${FLINK_IMAGE:-flink:1.9.1-scala_2.11}
+    command: jobmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+    ports:
+      - "8081:8081"
+    networks:
+      - jax
+  db:
+    image: mysql:5.7.25
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: jax_db
+    networks:
+      - jax
+    volumes:
+      - db-data:/var/lib/mysql
+
+networks:
+  jax:
+
+volumes:
+  db-data:
+  web-data:

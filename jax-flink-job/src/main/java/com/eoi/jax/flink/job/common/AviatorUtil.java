@@ -14,7 +14,6 @@
 
 package com.eoi.jax.flink.job.common;
 
-import com.eoi.jax.common.CopyUtil;
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.AviatorEvaluatorInstance;
 import com.googlecode.aviator.Expression;
@@ -22,7 +21,6 @@ import com.googlecode.aviator.Options;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class AviatorUtil {
@@ -32,12 +30,6 @@ public class AviatorUtil {
 
     static {
         instance.setOption(Options.USE_USER_ENV_AS_TOP_ENV_DIRECTLY, false);
-        // copy 内置script到临时文件
-        try {
-            CopyUtil.copyResource(AviatorUtil.class, "/custom_fn.av");
-        } catch (IOException ex) {
-            LOG.error("copyResource /custom_fn.av failed", ex);
-        }
     }
 
     public static <T> T eval(String expStr, Map<String,Object> env) {

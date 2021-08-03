@@ -68,11 +68,11 @@ spring:
       - file:${jax.website.root}
   datasource:
     # JDBC连接串
-    url: jdbc:mysql://localhost:3306/jax_db?characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/jax_db?characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     # JDBC用户
-    username: root
+    username: ${MYSQL_USER:root}
     # JDBC密码
-    password: Pass@Mysql
+    password: ${MYSQL_PASSWORD:User@123}
     # JDBC使用Hikari连接池
     type: com.zaxxer.hikari.HikariDataSource
     # hikari连接池配置信息

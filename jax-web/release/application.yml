@@ -1,0 +1,31 @@
+server:
+  port: 9999
+  advertised:
+    address:
+    port:
+jax:
+  serverId: 1
+  website:
+    root: ${jax.home}/jax/www
+  thread:
+    flinkThreadPoolSize: 4
+    sparkThreadPoolSize: 4
+    statusStartingThreadPoolSize: 4
+    statusStoppingThreadPoolSize: 4
+    statusDefaultThreadPoolSize: 4
+  debug:
+    # python运行环境
+    pythonEnv: /home/python_venv
+  flinkDashboard:
+    # dashboard sever地址，格式如：http://localhost:3000
+    server:
+    summaryPath: overview
+    detailPath: detail
+spring:
+  datasource:
+    # JDBC连接串
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/jax_db?characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    # JDBC用户
+    username: ${MYSQL_USER:root}
+    # JDBC密码
+    password: ${MYSQL_PASSWORD:User@123}

@@ -276,11 +276,6 @@
                 <artifactId>aviator</artifactId>
                 <version>${aviator.version}</version>
             </dependency>
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>${joda.version}</version>
-            </dependency>
 
             <!-- WebSocket -->
             <dependency>
@@ -344,7 +339,10 @@
                             <exclude>.editorconfig</exclude>
                             <exclude>.gitignore</exclude>
                             <exclude>mvnw.cmd</exclude>
+                            <exclude>Dockerfile</exclude>
+                            <exclude>Makefile</exclude>
                             <exclude>jax-ui/**</exclude>
+                            <exclude>tmp/**</exclude>
                         </excludes>
                         <mapping>
                             <java>SLASHSTAR_STYLE</java>

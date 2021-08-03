@@ -1,11 +1,11 @@
 {
   "name": "middle-end",
-  "displayName": "夏洛克数字运维中台前端",
+  "displayName": "JAX",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "node_modules/.bin/vue-cli-service serve src/main.tsx --open --proxy-env",
-    "build": "vue-cli-service build src/main.jsx",
+    "build": "vue-cli-service build src/main.tsx",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
