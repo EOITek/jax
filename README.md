@@ -6,6 +6,14 @@ $ make package-all
 
 # Docker
 
+requirements
+
+```
+node/npm/yarn
+wget
+docker/docker compose
+```
+
 With flink 1.9 standalone cluster:
 
 ```sh
