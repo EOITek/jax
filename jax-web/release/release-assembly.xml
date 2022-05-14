@@ -18,6 +18,7 @@
                 <include>start-docker.sh</include>
                 <include>stop.sh</include>
             </includes>
+            <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
             <directory>${project.basedir}/release</directory>
@@ -56,6 +57,11 @@
         </fileSet>
     </fileSets>
     <files>
+        <file>
+            <source>${project.basedir}/src/main/resources/application.yml</source>
+            <outputDirectory>jax/jax/</outputDirectory>
+            <destName>application.yml</destName>
+        </file>
         <file>
             <source>${project.basedir}/src/main/resources/application.yml</source>
             <outputDirectory>jax/jax/</outputDirectory>

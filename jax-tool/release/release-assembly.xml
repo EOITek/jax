@@ -16,6 +16,7 @@
             <includes>
                 <include>jax-tool.sh</include>
             </includes>
+            <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
             <directory>${project.basedir}/target</directory>
