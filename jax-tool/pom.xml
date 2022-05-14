@@ -110,7 +110,7 @@
                         </goals>
                         <configuration>
                             <!-- 生产压缩包名称 -->
-                            <finalName>jax-tool-${project.version}-${maven.build.timestamp}</finalName>
+                            <finalName>jax-tool-${project.version}-all</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <!-- assembly配置文件 -->
                             <descriptors>

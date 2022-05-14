@@ -200,7 +200,7 @@
                         </goals>
                         <configuration>
                             <!-- 生产压缩包名称 -->
-                            <finalName>jax-${project.version}-${maven.build.timestamp}</finalName>
+                            <finalName>jax-${project.version}-all</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <!-- assembly配置文件 -->
                             <descriptors>
@@ -212,4 +212,52 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!--skip check of license ,style, javadoc for fast compile -->
+        <profile>
+            <id>dev_skip</id>
+            <activation>
+                <property>
+                    <name>dev_skip</name>
+                </property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.mycila</groupId>
+                            <artifactId>license-maven-plugin</artifactId>
+                            <configuration>
+                                <skip>true</skip>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-checkstyle-plugin</artifactId>
+                            <configuration>
+                                <skip>true</skip>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-enforcer-plugin</artifactId>
+                            <configuration>
+                                <skip>true</skip>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <configuration>
+                                <skip>true</skip>
+                            </configuration>
+                        </plugin>
+
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
 </project>

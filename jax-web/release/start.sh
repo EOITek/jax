@@ -20,4 +20,15 @@ LibDir=${JAX_HOME}/jax/lib
 
 JAX_JAVA_OPTS="-Xmx1024m -Xms1024m"
 
+# Set Debug options if enabled
+if [ "x$JAX_WEB_DEBUG_PORT" != "x" ]; then
+    # Use the defaults if JAVA_DEBUG_OPTS was not set
+    DEFAULT_JAVA_DEBUG_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=$JAX_WEB_DEBUG_PORT"
+    if [ -z "$JAVA_DEBUG_OPTS" ]; then
+        JAVA_DEBUG_OPTS="$DEFAULT_JAVA_DEBUG_OPTS"
+    fi
+	echo "Enabling Java debug options: $JAVA_DEBUG_OPTS"
+    JAX_JAVA_OPTS="$JAVA_DEBUG_OPTS $JAX_JAVA_OPTS"
+fi
+
 exec "$JAVA" -Dloader.path=${LibDir} -jar $JAX_JAVA_OPTS -Dspring.config.location=${ConfigLocation} -Dlogging.config=${LoggingConfig} ${ProgramJar} "$@" <&- &

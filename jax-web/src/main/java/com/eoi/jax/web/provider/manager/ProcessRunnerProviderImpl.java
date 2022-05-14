@@ -23,6 +23,8 @@ import com.eoi.jax.web.provider.ProcessRunnerProvider;
 import com.eoi.jax.web.provider.cluster.Cluster;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Map;
 
 @Service
@@ -43,15 +45,22 @@ public class ProcessRunnerProviderImpl implements ProcessRunnerProvider {
 
     @Override
     public IProcessRunner flinkProcessRunner(Cluster cluster) {
-        return new ProcessRunner(
+        ProcessRunner processRunner = new ProcessRunner(
                 ConfigLoader.load().jax.getWork(),
                 cluster.getFlinkOpts().getBin(),
                 cluster.getTimeoutMs()
-        ).putEnvironment(
+        );
+        processRunner.putEnvironment(
                 AppConfig.HADOOP_CONF_DIR,
                 cluster.getHadoopConfig(),
                 StrUtil.isNotBlank(cluster.getHadoopHome())
         );
+        // Set env: FLINK_CONF_DIR: 优先取自定flink/conf, 再尝试系统环境变量
+        String confDir = cluster.getFlinkOpts().getDefaultConfDir();
+        if (Files.exists(Paths.get(confDir))) {
+            processRunner.putEnvironment("FLINK_CONF_DIR", confDir, true);
+        }
+        return processRunner;
     }
 
     @Override

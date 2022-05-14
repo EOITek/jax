@@ -22,6 +22,9 @@ import com.eoi.jax.web.dao.entity.TbCluster;
 import com.eoi.jax.web.dao.entity.TbOptsFlink;
 import org.springframework.beans.BeanUtils;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -306,6 +309,17 @@ public class ClusterFlinkOpts {
 
     public String getLib() {
         return ClusterVariable.genFlinkLib(getHome());
+    }
+
+    public String getDefaultConfDir() {
+        Path flinkConfInstall = Paths.get(getHome(), "conf");
+        if (!Files.exists(flinkConfInstall)) {
+            String flinkConfDirVal = System.getenv("FLINK_CONF_DIR");
+            if (null != flinkConfDirVal && !flinkConfDirVal.isEmpty()) {
+                flinkConfInstall = Paths.get(flinkConfDirVal);
+            }
+        }
+        return flinkConfInstall.toString();
     }
 
     public ClusterFlinkOpts withDefault() {
