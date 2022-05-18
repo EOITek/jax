@@ -124,15 +124,27 @@ export JAX_WEB_DEBUG_PORT=45000
 - docker/docker-compose
 
 
-默认安装的flink计算引擎是1.9.1版本,并会启1个Flink Standalone模式容器, 命令如下: 
-
-With flink 1.9 standalone cluster:
+首先需要生成 jax docker镜像
 ```sh
-$ make image
-$ docker-compose up
+make image
 ```
 
 
+默认安装的flink计算引擎是1.9.1版本,并会启1个Flink Standalone模式容器, 
+本测试Docker Demo中会启1个Zookeeper/Kafka服务, 需要指定一个用于外网可访问的Kafka广播IP环境变量: $KAFKA_AD_IP
+可先通过如下命令生成 KAFKA_AD_IP=宿主机IP变量, 再 docker-compose up 构建和启动 mysql,redis,kafka,jax等服务;
+
+```sh
+export KAFKA_AD_IP=$(ip addr|grep "global ens"| tail -n1|awk '{print $2}'|awk -F"/" '{print $1}')
+# 或者在命令行直接赋值环境变量: KAFKA_AD_IP
+# export KAFKA_AD_IP=192.168.51.124
+echo $KAFKA_AD_IP
+```
+
+With flink 1.9 standalone cluster:
+```sh
+docker-compose up
+```
 
 With flink 1.12 standalone cluster:
 

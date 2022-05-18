@@ -17,6 +17,7 @@ package com.eoi.jax.web.common.util;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.StrUtil;
+import com.eoi.jax.web.common.config.ConfigLoader;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -29,6 +30,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class Common {
+    public static final String VAR_JAX_HOME = "${JAX_HOME}";
+
     private Common() {
         // forbid init instance
     }
@@ -114,4 +117,12 @@ public class Common {
         ClassPathResource resource = new ClassPathResource(path, loader);
         return resource.readBytes();
     }
+
+    public static String replaceJaxHomeAsPath(String var) {
+        var = StrUtil.replace(var,
+                VAR_JAX_HOME,
+                ConfigLoader.load().jax.getHome());
+        return Paths.get(var).toString();
+    }
+
 }

@@ -17,6 +17,8 @@ package com.eoi.jax.web.dao.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.eoi.jax.web.common.util.Common;
+import org.springframework.beans.BeanUtils;
 
 @TableName("tb_jar")
 public class TbJar {
@@ -162,5 +164,12 @@ public class TbJar {
 
     public void setJobType(String jobType) {
         this.jobType = jobType;
+    }
+
+    public TbJar cloneFromDB() {
+        TbJar clone = new TbJar();
+        BeanUtils.copyProperties(this,clone);
+        clone.setJarPath(Common.replaceJaxHomeAsPath(getJarPath()));
+        return clone;
     }
 }
