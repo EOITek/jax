@@ -68,7 +68,7 @@ spring:
       - file:${jax.website.root}
   datasource:
     # JDBC连接串
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/jax_db?characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/${JAX_META_DB:jax_db}?characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     # JDBC用户
     username: ${MYSQL_USER:root}
     # JDBC密码
