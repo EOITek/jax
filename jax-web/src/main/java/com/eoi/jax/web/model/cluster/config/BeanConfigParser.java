@@ -56,8 +56,7 @@ public class BeanConfigParser {
                     continue;
                 }
                 String fieldName = field.getName();
-                ConfigDescription confDesc = ConfigDescription.fromDef(annotation);
-                confDesc.setName(fieldName);
+                ConfigDescription confDesc = ConfigDescription.fromDef(fieldName,annotation);
                 foundConfigDefs.put(fieldName,confDesc);
             } catch (RuntimeException e) {
                 throw new BizException(ResponseCode.INVALID_PARAM);

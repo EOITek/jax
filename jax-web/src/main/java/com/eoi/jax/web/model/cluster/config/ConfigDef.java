@@ -53,15 +53,19 @@ public @interface ConfigDef {
 
     Type type() default Type.STRING;
 
+    String label() default ""; // 字段显示标签，表示字段在表单中显示的label
+
     String defaultValue() default "";
 
     boolean required() default true;
 
     String description() default "";
 
+    String placeholder() default "";
+
     String group() default "";
 
-    int displayPosition() default Integer.MAX_VALUE;
+    int displayPosition() default 0;
 
     boolean hidden() default false;
 

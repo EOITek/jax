@@ -61,6 +61,7 @@
         <flyway.version>5.2.4</flyway.version>
         <aviator.version>5.2.2</aviator.version>
         <csv.version>2.4.0</csv.version>
+        <swagger.version>2.9.2</swagger.version>
 
         <!--flink 1.9-->
         <flink.version>1.9.1</flink.version>
@@ -307,6 +308,30 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-core</artifactId>
                 <version>${flyway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>byte-buddy</artifactId>
+                        <groupId>net.bytebuddy</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>mapstruct</artifactId>
+                        <groupId>org.mapstruct</groupId>
+                    </exclusion>
+                    <!--<exclusion>-->
+                    <!--<artifactId>spring-aop</artifactId>-->
+                    <!--<groupId>org.springframework</groupId>-->
+                    <!--</exclusion>-->
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
 
         </dependencies>

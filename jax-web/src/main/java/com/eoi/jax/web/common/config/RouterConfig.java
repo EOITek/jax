@@ -90,5 +90,10 @@ public class RouterConfig implements WebMvcConfigurer {
                                 new FileSystemResource(ConfigLoader.load().jax.getWebsite().getIndex());
                     }
                 });
+
+
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
     }
 }

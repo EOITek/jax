@@ -55,6 +55,8 @@ jax:
   tool:
     jaxToolBin: ${jax.home}/jax/tool/jax-tool.sh
     jaxToolTimeoutMillis: 60000
+  swagger:
+    swagger-ui-open: true
 
 spring:
   application:

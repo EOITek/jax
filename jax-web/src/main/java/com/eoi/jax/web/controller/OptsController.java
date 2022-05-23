@@ -15,21 +15,11 @@
 package com.eoi.jax.web.controller;
 
 import com.eoi.jax.web.common.ResponseResult;
-import com.eoi.jax.web.model.opts.MigrationResp;
-import com.eoi.jax.web.model.opts.OptsFlinkReq;
-import com.eoi.jax.web.model.opts.OptsFlinkResp;
-import com.eoi.jax.web.model.opts.OptsResp;
-import com.eoi.jax.web.model.opts.OptsSparkReq;
-import com.eoi.jax.web.model.opts.OptsSparkResp;
+import com.eoi.jax.web.model.opts.*;
 import com.eoi.jax.web.service.OptsService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,21 +29,25 @@ public class OptsController extends V1Controller {
     @Autowired
     private OptsService optsService;
 
+    @ApiOperation("获取opts列表")
     @GetMapping("opts")
     public ResponseResult<List<OptsResp>> list() {
         return new ResponseResult<List<OptsResp>>().setEntity(optsService.listOpts());
     }
 
+    @ApiOperation("获取opts-flink列表")
     @GetMapping("opts/flink")
     public ResponseResult<List<OptsFlinkResp>> listFlink() {
         return new ResponseResult<List<OptsFlinkResp>>().setEntity(optsService.listFlink());
     }
 
+    @ApiOperation("获取opts-flink详情")
     @GetMapping("opts/flink/{flinkOptsName}")
     public ResponseResult<OptsFlinkResp> getFlink(@PathVariable("flinkOptsName") String flinkOptsName) {
         return new ResponseResult<OptsFlinkResp>().setEntity(optsService.getFlink(flinkOptsName));
     }
 
+    @ApiOperation("新建opts-flink")
     @PostMapping("opts/flink/{flinkOptsName}")
     public ResponseResult<OptsFlinkResp> createFlink(@PathVariable("flinkOptsName") String flinkOptsName,
                                                      @RequestBody OptsFlinkReq req) {
@@ -61,6 +55,7 @@ public class OptsController extends V1Controller {
         return new ResponseResult<OptsFlinkResp>().setEntity(optsService.createFlink(req));
     }
 
+    @ApiOperation("更新opts-flink")
     @PutMapping("opts/flink/{flinkOptsName}")
     public ResponseResult<OptsFlinkResp> updateFlink(@PathVariable("flinkOptsName") String flinkOptsName,
                                                      @RequestBody OptsFlinkReq req) {
@@ -68,21 +63,25 @@ public class OptsController extends V1Controller {
         return new ResponseResult<OptsFlinkResp>().setEntity(optsService.updateFlink(req));
     }
 
+    @ApiOperation("删除opts-flink详情")
     @DeleteMapping("opts/flink/{flinkOptsName}")
     public ResponseResult<OptsFlinkResp> deleteFlink(@PathVariable("flinkOptsName") String flinkOptsName) {
         return new ResponseResult<OptsFlinkResp>().setEntity(optsService.deleteFlink(flinkOptsName));
     }
 
+    @ApiOperation("获取opts-spark列表")
     @GetMapping("opts/spark")
     public ResponseResult<List<OptsSparkResp>> listSpark() {
         return new ResponseResult<List<OptsSparkResp>>().setEntity(optsService.listSpark());
     }
 
+    @ApiOperation("获取opts-spark详情")
     @GetMapping("opts/spark/{sparkOptsName}")
     public ResponseResult<OptsSparkResp> getSpark(@PathVariable("sparkOptsName") String sparkOptsName) {
         return new ResponseResult<OptsSparkResp>().setEntity(optsService.getSpark(sparkOptsName));
     }
 
+    @ApiOperation("新建opts-spark")
     @PostMapping("opts/spark/{sparkOptsName}")
     public ResponseResult<OptsSparkResp> createSpark(@PathVariable("sparkOptsName") String sparkOptsName,
                                                      @RequestBody OptsSparkReq req) {
@@ -90,6 +89,7 @@ public class OptsController extends V1Controller {
         return new ResponseResult<OptsSparkResp>().setEntity(optsService.createSpark(req));
     }
 
+    @ApiOperation("更新opts-spark")
     @PutMapping("opts/spark/{sparkOptsName}")
     public ResponseResult<OptsSparkResp> updateSpark(@PathVariable("sparkOptsName") String sparkOptsName,
                                                      @RequestBody OptsSparkReq req) {
@@ -97,11 +97,13 @@ public class OptsController extends V1Controller {
         return new ResponseResult<OptsSparkResp>().setEntity(optsService.updateSpark(req));
     }
 
+    @ApiOperation("删除opts-spark详情")
     @DeleteMapping("opts/spark/{sparkOptsName}")
     public ResponseResult<OptsSparkResp> deleteSpark(@PathVariable("sparkOptsName") String sparkOptsName) {
         return new ResponseResult<OptsSparkResp>().setEntity(optsService.deleteSpark(sparkOptsName));
     }
 
+    @ApiOperation("获取opts列表")
     @GetMapping("opts-options")
     public ResponseResult<MigrationResp> options() {
         MigrationResp resp = new MigrationResp();

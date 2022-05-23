@@ -11,6 +11,4 @@ import java.lang.annotation.Target;
 public @interface ConfigBean {
 
     String value() default "";
-
-
 }

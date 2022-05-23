@@ -16,8 +16,9 @@ public class FlinkStandaloneClusterBean extends CommClusterBean {
     @ConfigDef(description = "Flink框架集",displayPosition = 33)
     private String flinkOptsName;
 
-    @ConfigDef(description = "默认Flink运行集群",displayPosition = 34)
+    @ConfigDef(description = "默认Flink运行集群",displayPosition = 34,type = ConfigDef.Type.BOOLEAN)
     private Boolean defaultFlinkCluster;
+
 
 
 }
