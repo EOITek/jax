@@ -33,6 +33,7 @@ import com.eoi.jax.web.dao.service.TbOptsSparkService;
 import com.eoi.jax.web.dao.service.TbPipelineService;
 import com.eoi.jax.web.model.cluster.ClusterReq;
 import com.eoi.jax.web.model.cluster.ClusterResp;
+import com.eoi.jax.web.model.cluster.bean.ClusterRequest;
 import com.eoi.jax.web.provider.ResourceManagerProvider;
 import com.eoi.jax.web.provider.cluster.Cluster;
 import com.eoi.jax.web.provider.cluster.ClusterProvider;
@@ -288,5 +289,9 @@ public class ClusterService {
             throw new BizException(ResponseCode.CLUSTER_NOT_EXIST);
         }
         return count > 0;
+    }
+
+    public void save(String clusterName, ClusterRequest req) {
+
     }
 }

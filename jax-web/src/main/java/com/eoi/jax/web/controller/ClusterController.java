@@ -17,18 +17,16 @@ package com.eoi.jax.web.controller;
 import com.eoi.jax.web.common.ResponseResult;
 import com.eoi.jax.web.model.cluster.ClusterReq;
 import com.eoi.jax.web.model.cluster.ClusterResp;
-import com.eoi.jax.web.model.cluster.config.ConfigDescribe;
-import com.eoi.jax.web.model.opts.MigrationResp;
-import com.eoi.jax.web.model.opts.OptsDescribe;
-import com.eoi.jax.web.model.opts.OptsFlinkResp;
-import com.eoi.jax.web.model.opts.OptsSparkResp;
+import com.eoi.jax.web.model.cluster.bean.ClusterRequest;
+import com.eoi.jax.web.model.cluster.bean.SparkStandaloneClusterBean;
+import com.eoi.jax.web.model.cluster.bean.YarnClusterBean;
+import com.eoi.jax.web.model.cluster.config.BeanConfigParser;
+import com.eoi.jax.web.model.cluster.config.ConfigDescription;
 import com.eoi.jax.web.provider.resource.ClusterResourcePool;
 import com.eoi.jax.web.service.ClusterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,44 +76,25 @@ public class ClusterController extends V1Controller {
     }
 
     @GetMapping("cluster-options")
-    public ResponseResult<Map<String,List<OptsDescribe>>> clusterOptionsTemplate() {
-        MigrationResp resp = new MigrationResp();
-        OptsFlinkResp flinkResp = optsService.flinkOptions();
-        OptsSparkResp sparkResp = optsService.sparkOptions();
-        resp.setFlinkOptsList(flinkResp.getOptsList());
-        resp.setSparkOptsList(sparkResp.getOptsList());
+    public ResponseResult<Map<String,List<ConfigDescription>>> clusterOptionsTemplate() {
+        Class[] classes = {
+                YarnClusterBean.class,
+                SparkStandaloneClusterBean.class
+        };
+        Map<String, List<ConfigDescription>> configDescriptions = BeanConfigParser.parseConfigDescriptions(classes);
 
+        return new ResponseResult<Map<String,List<ConfigDescription>>>().setEntity(configDescriptions);
+    }
 
-        class RMClusterOptionDesc{
-            private String name;
-            private String desc;
-            private String description;
-            private String entryClass;
-            private String version;
-            private List<ConfigDescribe> options;
-        }
+    @PostMapping("cluster/save/{clusterName}")
+    public ResponseResult<ClusterResp> save(
+            @PathVariable(value = "clusterName") String clusterName,
+            @RequestBody ClusterRequest req) {
 
-
-        RMClusterOptionDesc yarnOptDesc = null;
-        RMClusterOptionDesc k8sOptDesc = null;
-        RMClusterOptionDesc flinkStandaloneOptDesc = null;
-        RMClusterOptionDesc sparkStandaloneOptDesc = null;
-
-        Map<String,List<OptsDescribe>> typeOptionDescMap = new HashMap<>();
-        List<RMClusterOptionDesc> supportedRMClusterTypes = Arrays.asList(
-                yarnOptDesc,
-                flinkStandaloneOptDesc,
-                sparkStandaloneOptDesc
-        );
-
-
-        supportedRMClusterTypes.forEach(typeDesc->{
-//            typeOptionDescMap.put(typeDesc.name,typeDesc);
-            typeOptionDescMap.put(typeDesc.name,typeDesc.options);
-        });
-
-
-        return new ResponseResult<Map<String,List<OptsDescribe>>>().setEntity(typeOptionDescMap);
+        clusterService.save(clusterName,req);
+        return new ResponseResult<ClusterResp>()
+//                .setEntity(clusterService.createCluster(req))
+                ;
     }
 
 }

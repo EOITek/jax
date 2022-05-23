@@ -61,7 +61,7 @@ public @interface ConfigDef {
 
     String group() default "";
 
-    int displayPosition() default 0;
+    int displayPosition() default Integer.MAX_VALUE;
 
     boolean hidden() default false;
 
