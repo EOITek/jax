@@ -225,7 +225,7 @@ public class ClusterService {
         if (verifySparkOpts) {
             verifySparkOpts(req.getSparkOptsName());
         }
-        if (req.getTimeoutMs() <= 0) {
+        if (null == req.getTimeoutMs() || req.getTimeoutMs() <= 0) {
             req.setTimeoutMs(600000L);
         }
     }

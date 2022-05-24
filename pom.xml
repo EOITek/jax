@@ -345,6 +345,14 @@
                     <artifactId>license-maven-plugin</artifactId>
                     <version>3.0</version>
                     <executions>
+                        <!--<execution>-->
+                            <!--<id>license</id>-->
+                            <!--<phase>generate-sources</phase>-->
+                            <!--<goals>-->
+                                <!--<goal>remove</goal>-->
+                                <!--<goal>format</goal>-->
+                            <!--</goals>-->
+                        <!--</execution>-->
                         <execution>
                             <id>license</id>
                             <phase>validate</phase>
@@ -515,5 +523,60 @@
                 </pluginManagement>
             </build>
         </profile>
+
+        <!--<profile>-->
+            <!--<id>gen_license</id>-->
+            <!--<activation>-->
+                <!--<property>-->
+                    <!--<name>gen_license</name>-->
+                <!--</property>-->
+                <!--<activeByDefault>true</activeByDefault>-->
+            <!--</activation>-->
+            <!--<build>-->
+                <!--<pluginManagement>-->
+                    <!--<plugins>-->
+                        <!--<plugin>-->
+                            <!--<groupId>com.mycila</groupId>-->
+                            <!--<artifactId>license-maven-plugin</artifactId>-->
+                            <!--<version>3.0</version>-->
+                            <!--<executions>-->
+                                <!--<execution>-->
+                                    <!--<phase>generate-sources</phase>-->
+                                    <!--<goals>-->
+                                        <!--<goal>remove</goal>&lt;!&ndash; remove：删除创建的版本信息 &ndash;&gt;-->
+                                        <!--<goal>format</goal>&lt;!&ndash; format：如果存在就更新，不存在就创建 &ndash;&gt;-->
+                                    <!--</goals>-->
+                                <!--</execution>-->
+                            <!--</executions>-->
+                            <!--<configuration>-->
+                                <!--<quiet>true</quiet>-->
+                                <!--<header>../dev/APACHE-2.txt</header>-->
+                                <!--<excludes>-->
+                                    <!--<exclude>**/*.properties</exclude>-->
+                                    <!--<exclude>**/*.sh</exclude>-->
+                                    <!--<exclude>**/*.yml</exclude>-->
+                                    <!--<exclude>**/*.md</exclude>-->
+                                    <!--<exclude>**/*.xml</exclude>-->
+                                    <!--<exclude>**/resources/**</exclude>-->
+                                    <!--<exclude>.editorconfig</exclude>-->
+                                    <!--<exclude>.gitignore</exclude>-->
+                                    <!--<exclude>mvnw.cmd</exclude>-->
+                                    <!--<exclude>Dockerfile</exclude>-->
+                                    <!--<exclude>Makefile</exclude>-->
+                                    <!--<exclude>jax-ui/**</exclude>-->
+                                    <!--<exclude>tmp/**</exclude>-->
+                                <!--</excludes>-->
+                                <!--<strictCheck>true</strictCheck>-->
+                                <!--<mapping>-->
+                                    <!--<java>SLASHSTAR_STYLE</java>-->
+                                    <!--<scala>SLASHSTAR_STYLE</scala>-->
+                                <!--</mapping>-->
+                            <!--</configuration>-->
+                        <!--</plugin>-->
+
+                    <!--</plugins>-->
+                <!--</pluginManagement>-->
+            <!--</build>-->
+        <!--</profile>-->
     </profiles>
 </project>
