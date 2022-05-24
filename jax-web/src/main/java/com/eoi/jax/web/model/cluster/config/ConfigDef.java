@@ -22,26 +22,6 @@ public @interface ConfigDef {
 
         ;
 
-//        private final transient Object defaultValue;
-//
-//        Type(Object defaultValue) {
-//            this.defaultValue = defaultValue;
-//        }
-//
-//        public Object getDefault(Class variableClass) {
-//            Object value;
-//            if (variableClass.isEnum()) {
-//                value = variableClass.getEnumConstants()[0];
-//            } else if (Map.class.isAssignableFrom(variableClass)) {
-//                value = Collections.emptyMap();
-//            } else if (List.class.isAssignableFrom(variableClass)) {
-//                value = Collections.emptyList();
-//            } else {
-//                value = defaultValue;
-//            }
-//            return value;
-//        }
-
         public final transient String code;
 
         Type(String code) {

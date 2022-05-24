@@ -15,11 +15,22 @@
 package com.eoi.jax.web.controller;
 
 import com.eoi.jax.web.common.ResponseResult;
-import com.eoi.jax.web.model.opts.*;
+import com.eoi.jax.web.model.opts.MigrationResp;
+import com.eoi.jax.web.model.opts.OptsFlinkReq;
+import com.eoi.jax.web.model.opts.OptsFlinkResp;
+import com.eoi.jax.web.model.opts.OptsResp;
+import com.eoi.jax.web.model.opts.OptsSparkReq;
+import com.eoi.jax.web.model.opts.OptsSparkResp;
 import com.eoi.jax.web.service.OptsService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

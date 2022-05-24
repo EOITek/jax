@@ -96,18 +96,11 @@ public class ClusterController extends V1Controller {
                 YarnClusterBean.class,
                 SparkStandaloneClusterBean.class,
                 FlinkStandaloneClusterBean.class,
-//                K8sClusterBean.class, // now, not support k8s
+                // K8sClusterBean.class, // now, not support k8s
         };
         Map<String, List<ConfigDescription>> configDescriptions = BeanConfigParser.parseConfigDescriptions(classes);
 
         return new ResponseResult<Map<String,List<ConfigDescription>>>().setEntity(configDescriptions);
     }
-
-//    @ApiOperation("新建cluster-动态表")
-//    @PostMapping("cluster/save")
-//    public ResponseResult<ClusterResp> save(@RequestBody ClusterDynRequest req) {
-//
-//        return new ResponseResult<ClusterResp>();
-//    }
 
 }

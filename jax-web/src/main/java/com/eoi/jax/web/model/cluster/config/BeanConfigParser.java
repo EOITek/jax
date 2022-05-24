@@ -4,15 +4,20 @@ import com.eoi.jax.web.common.ResponseCode;
 import com.eoi.jax.web.common.exception.BizException;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 
 public class BeanConfigParser {
 
     public Map<String, BeanConfigsDescription> getBeanDescriptions(Class... classes) {
         Map<String, BeanConfigsDescription> beanConfigDefs = new LinkedHashMap<>();
-        for(Class clazz: classes){
+        for (Class clazz: classes) {
             BeanConfigsDescription beanDesc = parseConfigBeanByClass(clazz);
-            if(null != beanDesc){
+            if (null != beanDesc) {
                 beanConfigDefs.put(beanDesc.getName(),beanDesc);
             }
         }
@@ -21,9 +26,9 @@ public class BeanConfigParser {
 
     public static Map<String, List<ConfigDescription>> parseConfigDescriptions(Class... classes) {
         Map<String, List<ConfigDescription>> beanConfigDefs = new LinkedHashMap<>();
-        for(Class clazz: classes){
+        for (Class clazz: classes) {
             BeanConfigsDescription beanDesc = parseConfigBeanByClass(clazz);
-            if(null != beanDesc){
+            if (null != beanDesc) {
                 beanConfigDefs.put(beanDesc.getName(), new ArrayList<>(beanDesc.getConfigs().values()));
             }
         }
@@ -35,20 +40,20 @@ public class BeanConfigParser {
         Class tmpClazz = clazz;
         while (null != tmpClazz) {
             Field[] fields = tmpClazz.getDeclaredFields();
-            if(null != fields && fields.length>0){
-                for(Field field: fields){
+            if (null != fields && fields.length > 0) {
+                for (Field field: fields) {
                     allFields.add(field);
                 }
             }
-            tmpClazz =tmpClazz.getSuperclass();
+            tmpClazz = tmpClazz.getSuperclass();
         }
 
-        if(allFields.isEmpty()){
+        if (allFields.isEmpty()) {
             return null;
         }
 
         Map<String, ConfigDescription> foundConfigDefs = new LinkedHashMap<>();
-        for(Field field: allFields){
+        for (Field field: allFields) {
             try {
                 field.setAccessible(true);
                 ConfigDef annotation = field.getAnnotation(ConfigDef.class);
@@ -63,15 +68,15 @@ public class BeanConfigParser {
             }
         }
 
-        if(foundConfigDefs.isEmpty()) {
+        if (foundConfigDefs.isEmpty()) {
             return null;
         }
 
         String name = clazz.getSimpleName();
-        if(clazz.isAnnotationPresent(ConfigBean.class)) {
+        if (clazz.isAnnotationPresent(ConfigBean.class)) {
             ConfigBean annotation = (ConfigBean) clazz.getAnnotation(ConfigBean.class);
             String value = annotation.value();
-            if(! value.isEmpty()){
+            if (! value.isEmpty()) {
                 name = value;
             }
         }

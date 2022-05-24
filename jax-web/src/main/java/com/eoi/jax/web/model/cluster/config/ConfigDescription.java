@@ -1,11 +1,8 @@
 package com.eoi.jax.web.model.cluster.config;
 
-import lombok.Data;
 
-@Data
 public class ConfigDescription {
     private String name;
-//    private Object value;
 
     private String type;
     private String label;
@@ -17,16 +14,95 @@ public class ConfigDescription {
     private Integer displayPosition;
     private Boolean hidden;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
+    public Boolean getRequired() {
+        return required;
+    }
+
+    public void setRequired(Boolean required) {
+        this.required = required;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPlaceholder() {
+        return placeholder;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public Integer getDisplayPosition() {
+        return displayPosition;
+    }
+
+    public void setDisplayPosition(Integer displayPosition) {
+        this.displayPosition = displayPosition;
+    }
+
+    public Boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
+    }
 
     public static ConfigDescription fromDef(String fieldName, ConfigDef annotation) {
-        if(null == annotation) {
+        if (null == annotation) {
             return null;
         }
         ConfigDescription desc = new ConfigDescription();
         desc.setName(fieldName);
         desc.setType(annotation.type().name());
         String label = annotation.label();
-        if(null == label && label.isEmpty()){
+        if (null == label && label.isEmpty()) {
             label = fieldName;
         }
         desc.setLabel(label);
