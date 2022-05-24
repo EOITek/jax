@@ -9,7 +9,7 @@ public class CommClusterBean {
 //    @ConfigDef(label = "描述",displayPosition = 3,required = false)
 //    private String clusterDescription;
 
-    @ConfigDef(label = "提交超时",displayPosition = 4,required = false,type = ConfigDef.Type.LONG,description = "单位秒",defaultValue = "60")
+    @ConfigDef(label = "提交超时",displayPosition = 4,required = false,type = ConfigDef.Type.LONG,description = "单位毫秒")
     private Long timeoutMs;
 
 
