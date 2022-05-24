@@ -11,12 +11,15 @@ import java.lang.annotation.Target;
 public @interface ConfigDef {
 
     public enum Type {
-        BOOLEAN("BOOL"),
+        BOOL("BOOL"),
         LONG("LONG"),
         DOUBLE("DOUBLE"),
         STRING("STRING"),
+        TEXT("TEXT"),
         LIST("LIST"),
         MAP("MAP"),
+        ENUM_CHOOSER("ENUM_CHOOSER"),
+
         ;
 
 //        private final transient Object defaultValue;

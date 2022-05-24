@@ -1,5 +1,6 @@
 package com.eoi.jax.web.model.cluster;
 
+import com.eoi.jax.web.dao.entity.TbCluster;
 import lombok.Data;
 
 import java.util.Map;
@@ -13,4 +14,9 @@ public class ClusterDynRequest {
     private Long updateTime;
     private Map<String,Object> configs;
 
+
+    public TbCluster toEntity(TbCluster tbCluster) {
+
+        return null;
+    }
 }

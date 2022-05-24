@@ -17,20 +17,21 @@ package com.eoi.jax.web.model.cluster.bean;
 import com.eoi.jax.web.model.cluster.config.ConfigBean;
 import com.eoi.jax.web.model.cluster.config.ConfigDef;
 
-@ConfigBean("spark")
+@ConfigBean("spark_stanalone")
 public class SparkStandaloneClusterBean extends CommClusterBean {
 
 
-    @ConfigDef(description = "SPARK_WEB_ADDR",displayPosition = 21,group = "Group1")
+    @ConfigDef(label = "SPARK_WEB_ADDR",displayPosition = 21)
     private String sparkWebUrl;
-    @ConfigDef(description = "SPARK_MASTER",displayPosition = 22)
+    @ConfigDef(label = "SPARK_MASTER",displayPosition = 22)
     private String sparkServer;
 
-    @ConfigDef(description = "Spark框架集",displayPosition = 23)
-    private String sparkOptsName;
 
-    @ConfigDef(description = "默认Spark运行集群",displayPosition = 24,type = ConfigDef.Type.BOOLEAN)
-    private Boolean defaultSparkCluster;
+//    @ConfigDef(label = "Spark框架集",displayPosition = 23)
+//    private String sparkOptsName;
+//
+//    @ConfigDef(label = "默认Spark运行集群",displayPosition = 24,type = ConfigDef.Type.BOOL)
+//    private Boolean defaultSparkCluster;
 
 
 }

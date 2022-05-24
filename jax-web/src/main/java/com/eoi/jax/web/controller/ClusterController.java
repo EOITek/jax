@@ -15,11 +15,9 @@
 package com.eoi.jax.web.controller;
 
 import com.eoi.jax.web.common.ResponseResult;
-import com.eoi.jax.web.model.cluster.ClusterDynRequest;
 import com.eoi.jax.web.model.cluster.ClusterReq;
 import com.eoi.jax.web.model.cluster.ClusterResp;
 import com.eoi.jax.web.model.cluster.bean.FlinkStandaloneClusterBean;
-import com.eoi.jax.web.model.cluster.bean.K8sClusterBean;
 import com.eoi.jax.web.model.cluster.bean.SparkStandaloneClusterBean;
 import com.eoi.jax.web.model.cluster.bean.YarnClusterBean;
 import com.eoi.jax.web.model.cluster.config.BeanConfigParser;
@@ -98,22 +96,18 @@ public class ClusterController extends V1Controller {
                 YarnClusterBean.class,
                 SparkStandaloneClusterBean.class,
                 FlinkStandaloneClusterBean.class,
-                K8sClusterBean.class,
+//                K8sClusterBean.class, // now, not support k8s
         };
         Map<String, List<ConfigDescription>> configDescriptions = BeanConfigParser.parseConfigDescriptions(classes);
 
         return new ResponseResult<Map<String,List<ConfigDescription>>>().setEntity(configDescriptions);
     }
 
-    @ApiOperation("新建cluster-动态表")
-    @PostMapping("cluster/save/{clusterName}")
-    public ResponseResult<ClusterResp> save(
-            @PathVariable(value = "clusterName") String clusterName,
-            @RequestBody ClusterDynRequest req) {
-        clusterService.save(clusterName,null);
-        return new ResponseResult<ClusterResp>()
-//                .setEntity(clusterService.createCluster(req))
-        ;
-    }
+//    @ApiOperation("新建cluster-动态表")
+//    @PostMapping("cluster/save")
+//    public ResponseResult<ClusterResp> save(@RequestBody ClusterDynRequest req) {
+//
+//        return new ResponseResult<ClusterResp>();
+//    }
 
 }
