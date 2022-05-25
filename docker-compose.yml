@@ -15,6 +15,17 @@ services:
       - web-data:/app/jax/jar_dir
     networks:
       - jax
+  db:
+    image: mysql:5.7.25
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: jax_db
+    ports:
+      - "43306:3306"
+    networks:
+      - jax
+    volumes:
+      - db-data:/var/lib/mysql
   taskmanager:
     image: ${FLINK_IMAGE:-flink:1.9.1-scala_2.11}
     command: taskmanager
@@ -38,17 +49,6 @@ services:
       - "48081:8081"
     networks:
       - jax
-  db:
-    image: mysql:5.7.25
-    environment:
-      MYSQL_ROOT_PASSWORD: my-secret-pw
-      MYSQL_DATABASE: jax_db
-    ports:
-      - "43306:3306"
-    networks:
-      - jax
-    volumes:
-      - db-data:/var/lib/mysql
   zookeeper:
     image: wurstmeister/zookeeper
     networks:
