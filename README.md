@@ -30,7 +30,7 @@ JAX是一款轻量级的数据平台，JAX本身并不强制与某种数据存�
 
 
 
-# QuickStart 快速构建和体验JAX
+# QuickStart 快速构建和体验
 
 依赖环境: docker, docker-compose
 
