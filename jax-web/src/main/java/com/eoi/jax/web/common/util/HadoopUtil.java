@@ -17,6 +17,7 @@ package com.eoi.jax.web.common.util;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import com.eoi.jax.web.common.ResponseCode;
+import com.eoi.jax.web.common.config.AppConfig;
 import com.eoi.jax.web.common.exception.BizException;
 import com.eoi.jax.web.dao.entity.TbCluster;
 import com.eoi.jax.web.provider.cluster.ClusterVariable;
@@ -36,6 +37,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Paths;
 import java.security.PrivilegedExceptionAction;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,6 +80,10 @@ public class HadoopUtil {
 
     public static String readYarnWebUrl(String configHome) {
         Configuration config = readConfig(configHome);
+        return getYarnWebUrl(config);
+    }
+
+    public static String getYarnWebUrl(Configuration config) {
         String schema = "http://";
         String webUrl = null;
         // HA
@@ -224,4 +230,52 @@ public class HadoopUtil {
         }
         return finalPath;
     }
+
+    public static Configuration getHadoopConf(String hadoopHome) {
+        String[] possiblePaths = new String[4];
+        if (hadoopHome != null) {
+            possiblePaths[0] = Paths.get(hadoopHome, AppConfig.HADOOP_ETC_RELATIVE).toString(); // eoitek hadoop
+            possiblePaths[1] = Paths.get(hadoopHome,AppConfig.HADOOP_ETC_HADOOP_RELATIVE).toString(); // apache hadoop
+            possiblePaths[2] = Paths.get(hadoopHome,AppConfig.HADOOP_CONF).toString();
+        }
+        if (null != System.getenv(AppConfig.HADOOP_CONF_DIR)) {
+            possiblePaths[3] = Paths.get(System.getenv(AppConfig.HADOOP_CONF_DIR)).toString(); // eoitek hadoop
+        }
+        Configuration hadoopConf = null;
+        for (String possibleHadoopConfPath :possiblePaths) {
+            hadoopConf = getHadoopConfiguration(possibleHadoopConfPath);
+            if (hadoopConf != null) {
+                break;
+            }
+        }
+        return hadoopConf;
+    }
+
+    public static Configuration getHadoopConfiguration(String hadoopConfDir) {
+        if (new File(hadoopConfDir).exists()) {
+            Configuration hadoopConfiguration = new Configuration();
+            File coreSite = new File(hadoopConfDir, "core-site.xml");
+            if (coreSite.exists()) {
+                hadoopConfiguration.addResource(new Path(coreSite.getAbsolutePath()));
+            }
+            File hdfsSite = new File(hadoopConfDir, "hdfs-site.xml");
+            if (hdfsSite.exists()) {
+                hadoopConfiguration.addResource(new Path(hdfsSite.getAbsolutePath()));
+            }
+            File yarnSite = new File(hadoopConfDir, "yarn-site.xml");
+            if (yarnSite.exists()) {
+                hadoopConfiguration.addResource(new Path(yarnSite.getAbsolutePath()));
+            }
+            // Add mapred-site.xml. We need to read configurations like compression codec.
+            File mapredSite = new File(hadoopConfDir, "mapred-site.xml");
+            if (mapredSite.exists()) {
+                hadoopConfiguration.addResource(new Path(mapredSite.getAbsolutePath()));
+            }
+            return hadoopConfiguration;
+        }
+        return null;
+    }
+
+
+
 }
