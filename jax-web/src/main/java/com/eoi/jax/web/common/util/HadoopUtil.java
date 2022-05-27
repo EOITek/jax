@@ -236,10 +236,10 @@ public class HadoopUtil {
         if (hadoopHome != null) {
             possiblePaths[0] = Paths.get(hadoopHome, AppConfig.HADOOP_ETC_RELATIVE).toString(); // eoitek hadoop
             possiblePaths[1] = Paths.get(hadoopHome,AppConfig.HADOOP_ETC_HADOOP_RELATIVE).toString(); // apache hadoop
-            possiblePaths[2] = Paths.get(hadoopHome,AppConfig.HADOOP_CONF).toString();
+            possiblePaths[2] = Paths.get(hadoopHome,AppConfig.HADOOP_CONF).toString(); // old hadoop version
         }
         if (null != System.getenv(AppConfig.HADOOP_CONF_DIR)) {
-            possiblePaths[3] = Paths.get(System.getenv(AppConfig.HADOOP_CONF_DIR)).toString(); // eoitek hadoop
+            possiblePaths[3] = Paths.get(System.getenv(AppConfig.HADOOP_CONF_DIR)).toString(); // from env
         }
         Configuration hadoopConf = null;
         for (String possibleHadoopConfPath :possiblePaths) {
