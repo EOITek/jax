@@ -15,6 +15,8 @@
 package com.eoi.jax.web.common.util;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.CommonConfigurationKeysPublic;
+import org.apache.hadoop.yarn.conf.YarnConfiguration;
 import org.junit.Test;
 
 public class TestHadoopUtil {
@@ -22,8 +24,16 @@ public class TestHadoopUtil {
     @Test
     public void testGetConfDir() {
         String hadoopHome = "D:\\app-bigdata\\hadoop\\hadoop-2.7.7";
-        Configuration conf = HadoopUtil.getHadoopConf(hadoopHome);
+        Configuration conf = HadoopUtil.getConfFromHadoopHome(hadoopHome);
+        String hdfs = conf.get(CommonConfigurationKeysPublic.FS_DEFAULT_NAME_KEY);
+        String yarnUrl = conf.get(YarnConfiguration.RM_WEBAPP_HTTPS_ADDRESS);
         System.out.println(conf);
+
+        String confDir = "D:\\app-bigdata\\hadoop\\hadoop-2.7.2\\etc\\hadoop";
+        String hdfsServer = HadoopUtil.readHdfsServer(confDir);
+        String yarnWebUrl = HadoopUtil.readYarnWebUrl(confDir);
+        System.out.println(hdfsServer);
+
     }
 
 }

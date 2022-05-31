@@ -109,10 +109,12 @@ public class ClusterProvider {
 
     private ClusterReq fillHadoopMetaInfo(ClusterReq req) {
         if (ClusterType.YARN.isEqual(req.getClusterType()) && StrUtil.isNotEmpty(req.getHadoopHome())) {
-            Configuration hadoopConf = HadoopUtil.getHadoopConf(req.getHadoopHome());
+            Configuration hadoopConf = HadoopUtil.getConfFromHadoopHome(req.getHadoopHome());
             if (null != hadoopConf) {
                 req.setHdfsServer(hadoopConf.get(HadoopUtil.HDFS_DEFAULT_NAME_KEY));
                 req.setYarnWebUrl(HadoopUtil.getYarnWebUrl(hadoopConf));
+            } else {
+                throw new IllegalArgumentException("Cannot find HADOOP_CONF_DIR from HADOOP_HOME=" + req.getHadoopHome());
             }
         }
         return req;

@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.PrivilegedExceptionAction;
 import java.util.ArrayList;
@@ -231,51 +232,38 @@ public class HadoopUtil {
         return finalPath;
     }
 
-    public static Configuration getHadoopConf(String hadoopHome) {
-        String[] possiblePaths = new String[4];
-        if (hadoopHome != null) {
-            possiblePaths[0] = Paths.get(hadoopHome, AppConfig.HADOOP_ETC_RELATIVE).toString(); // eoitek hadoop
-            possiblePaths[1] = Paths.get(hadoopHome,AppConfig.HADOOP_ETC_HADOOP_RELATIVE).toString(); // apache hadoop
-            possiblePaths[2] = Paths.get(hadoopHome,AppConfig.HADOOP_CONF).toString(); // old hadoop version
-        }
-        if (null != System.getenv(AppConfig.HADOOP_CONF_DIR)) {
-            possiblePaths[3] = Paths.get(System.getenv(AppConfig.HADOOP_CONF_DIR)).toString(); // from env
-        }
-        Configuration hadoopConf = null;
-        for (String possibleHadoopConfPath :possiblePaths) {
-            hadoopConf = getHadoopConfiguration(possibleHadoopConfPath);
-            if (hadoopConf != null) {
-                break;
-            }
-        }
-        return hadoopConf;
-    }
-
-    public static Configuration getHadoopConfiguration(String hadoopConfDir) {
-        if (new File(hadoopConfDir).exists()) {
-            Configuration hadoopConfiguration = new Configuration();
-            File coreSite = new File(hadoopConfDir, "core-site.xml");
-            if (coreSite.exists()) {
-                hadoopConfiguration.addResource(new Path(coreSite.getAbsolutePath()));
-            }
-            File hdfsSite = new File(hadoopConfDir, "hdfs-site.xml");
-            if (hdfsSite.exists()) {
-                hadoopConfiguration.addResource(new Path(hdfsSite.getAbsolutePath()));
-            }
-            File yarnSite = new File(hadoopConfDir, "yarn-site.xml");
-            if (yarnSite.exists()) {
-                hadoopConfiguration.addResource(new Path(yarnSite.getAbsolutePath()));
-            }
-            // Add mapred-site.xml. We need to read configurations like compression codec.
-            File mapredSite = new File(hadoopConfDir, "mapred-site.xml");
-            if (mapredSite.exists()) {
-                hadoopConfiguration.addResource(new Path(mapredSite.getAbsolutePath()));
-            }
-            return hadoopConfiguration;
+    public static Configuration getConfFromHadoopHome(String hadoopHome) {
+        String confDir = getConfDirFromHadoopHome(hadoopHome);
+        if (null != confDir) {
+            return readConfig(confDir);
         }
         return null;
     }
 
+    public static String getConfDirFromHadoopHome(String hadoopHome) {
+        String[] possiblePaths = new String[4];
+        String confDir = null;
+        try {
+            if (hadoopHome != null) {
+                possiblePaths[0] = Paths.get(hadoopHome, AppConfig.HADOOP_ETC_RELATIVE).toString(); // eoitek hadoop
+                possiblePaths[1] = Paths.get(hadoopHome,AppConfig.HADOOP_ETC_HADOOP_RELATIVE).toString(); // apache hadoop
+                possiblePaths[2] = Paths.get(hadoopHome,AppConfig.HADOOP_CONF).toString(); // old hadoop version
+            }
+            if (null != System.getenv(AppConfig.HADOOP_CONF_DIR)) {
+                possiblePaths[3] = Paths.get(System.getenv(AppConfig.HADOOP_CONF_DIR)).toString(); // from env
+            }
 
+            for (String possibleHadoopConfPath :possiblePaths) {
+
+                if (Files.exists(Paths.get(possibleHadoopConfPath))
+                        && Files.exists(Paths.get(possibleHadoopConfPath,"core-site.xml"))) {
+                    confDir = possibleHadoopConfPath;
+                }
+            }
+        } catch (RuntimeException e) {
+            logger.warn("Failed to parse HADOOP_CONF_DIR,cause: " + e.getMessage(),e);
+        }
+        return confDir;
+    }
 
 }
