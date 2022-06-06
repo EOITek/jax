@@ -22,7 +22,6 @@ public class YarnClusterBean extends CommClusterBean {
 
     @ConfigDef(label = "HADOOP_HOME",
             description = "配置JAX所在服务器的路径，可用${JAX_HOME}引用相对位置",
-            required = false,
             displayPosition = 11)
     private String hadoopHome;
 

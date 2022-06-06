@@ -18,17 +18,11 @@ import com.eoi.jax.web.model.cluster.config.ConfigDef;
 
 public class CommClusterBean {
 
-    @ConfigDef(label = "提交超时",
+    @ConfigDef(label = "提交超时(毫秒)",
             displayPosition = 4,
             type = ConfigDef.Type.LONG,
             description = "单位毫秒")
     private Long timeoutMs;
-
-    @ConfigDef(label = "单位",
-            displayPosition = 5,
-            type = ConfigDef.Type.STRING,
-            description = "信息补充, unit: ms")
-    private String unit;
 
     public Long getTimeoutMs() {
         return timeoutMs;
@@ -38,12 +32,5 @@ public class CommClusterBean {
         this.timeoutMs = timeoutMs;
     }
 
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
 
 }
