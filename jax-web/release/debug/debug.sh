@@ -32,6 +32,7 @@ LoggingConfig4Log4j="file:${DIR}/flink-debug-docker.properties"
 
 DEBUG_JAVA_OPTS="-Xmx1024m -Xms1024m ${DEBUG_JAVA_OPTS}"
 
-exec "$JAVA" ${DEBUG_JAVA_OPTS} -Dlogback.configurationFile="${LoggingConfig}" -Dlog4j.configuration="${LoggingConfig4Log4j}" "$@"
+# exec "$JAVA" ${DEBUG_JAVA_OPTS} -Dlogback.configurationFile="${LoggingConfig}" -Dlog4j.configuration="${LoggingConfig4Log4j}" "$@" > debug_out.log 2>&1
 
+$JAVA ${DEBUG_JAVA_OPTS} -Dlogback.configurationFile="${LoggingConfig}" -Dlog4j.configuration="${LoggingConfig4Log4j}" "$@" 2>&1 |tee $DIR/out_debug.log
 

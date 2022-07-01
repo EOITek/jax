@@ -12,18 +12,25 @@
  * limitations under the License.
  */
 
-package com.eoi.jax.web.model.opts;
+package com.eoi.jax.web.model.cluster.bean;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.eoi.jax.web.model.cluster.config.ConfigDef;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
-public @interface OptsValue {
-    OptsValueType type() default OptsValueType.STRING;
-    boolean required() default true;
-    String description() default "";
-    String label() default "";
+public class CommClusterBean {
+
+    @ConfigDef(label = "提交超时(毫秒)",
+            displayPosition = 4,
+            type = ConfigDef.Type.LONG,
+            description = "单位毫秒")
+    private Long timeoutMs;
+
+    public Long getTimeoutMs() {
+        return timeoutMs;
+    }
+
+    public void setTimeoutMs(Long timeoutMs) {
+        this.timeoutMs = timeoutMs;
+    }
+
+
 }

@@ -21,6 +21,7 @@ import com.eoi.jax.web.model.jar.JarQueryReq;
 import com.eoi.jax.web.model.jar.JarReq;
 import com.eoi.jax.web.model.jar.JarResp;
 import com.eoi.jax.web.service.JarService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,22 +44,26 @@ public class JarController extends V1Controller {
     @Autowired
     private JarService jarService;
 
+    @ApiOperation("获取jar列表")
     @GetMapping("jar")
     public ResponseResult<List<JarResp>> list() {
         return new ResponseResult<List<JarResp>>().setEntity(jarService.listJar());
     }
 
+    @ApiOperation("获取jar列表")
     @PostMapping("jar/list/query")
     public ResponseResult<List<JarResp>> query(@RequestBody JarQueryReq req) {
         Paged<JarResp> paged = jarService.queryJar(req);
         return new ResponseResult<List<JarResp>>().setEntity(paged.getList()).setTotal(paged.getTotal());
     }
 
+    @ApiOperation("获取jar详情")
     @GetMapping("jar/{jarName}")
     public ResponseResult<JarResp> get(@PathVariable("jarName") String jarName) {
         return new ResponseResult<JarResp>().setEntity(jarService.getJar(jarName));
     }
 
+    @ApiOperation("新建jar")
     @PostMapping("jar/{jarName}")
     public ResponseResult<JarResp> uploadCreate(
             @RequestParam("file") MultipartFile file,
@@ -80,6 +85,7 @@ public class JarController extends V1Controller {
         return new ResponseResult<JarResp>().setEntity(jarService.createJar(file, req));
     }
 
+    @ApiOperation("新建jar")
     @PostMapping("jar-build-in/{jarName}")
     public ResponseResult<JarResp> uploadBuildInCreate(
             @RequestParam(value = "jarBuildFile") String jarBuildFile,
@@ -121,6 +127,7 @@ public class JarController extends V1Controller {
         return new ResponseResult<JarResp>().setEntity(jarService.updateJar(file, req));
     }
 
+    @ApiOperation("更新jar")
     @PutMapping("jar-build-in/{jarName}")
     public ResponseResult<JarResp> uploadBuildInUpdate(
             @RequestParam(value = "jarBuildFile") String jarBuildFile,
@@ -142,11 +149,13 @@ public class JarController extends V1Controller {
         return new ResponseResult<JarResp>().setEntity(jarService.updateJar(jarBuildFile, req));
     }
 
+    @ApiOperation("删除jar")
     @DeleteMapping("jar/{jarName}")
     public ResponseResult<JarResp> delete(@PathVariable("jarName") String jarName) {
         return new ResponseResult<JarResp>().setEntity(jarService.deleteJar(jarName));
     }
 
+    @ApiOperation("archive jar")
     @GetMapping("jar-archive")
     public void archive(@RequestParam(value = "jars", required = true) String jars,
                         @RequestParam(value = "filename", required = false) String filename,
@@ -160,8 +169,11 @@ public class JarController extends V1Controller {
         jarService.archive(jars, response.getOutputStream());
     }
 
+    @ApiOperation("build-in jar")
     @GetMapping("jar-build-in")
     public ResponseResult<List<String>> buildIns() {
         return new ResponseResult<List<String>>().setEntity(jarService.listBuildIns());
     }
+
+
 }

@@ -45,6 +45,7 @@ public interface OptsResp {
                 describe.setType(annotation.type().code);
                 describe.setValue(field.get(this));
                 describe.setDescription(annotation.description());
+                describe.setLabel(annotation.label());
                 describe.setRequired(annotation.required());
                 list.add(describe);
             } catch (IllegalAccessException e) {

@@ -12,18 +12,17 @@
  * limitations under the License.
  */
 
-package com.eoi.jax.web.model.opts;
+package com.eoi.jax.web.model.cluster.config;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
-public @interface OptsValue {
-    OptsValueType type() default OptsValueType.STRING;
-    boolean required() default true;
-    String description() default "";
-    String label() default "";
+@Target(ElementType.TYPE)
+public @interface ConfigBean {
+
+    String value() default "";
 }
