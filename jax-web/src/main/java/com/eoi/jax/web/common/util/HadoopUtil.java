@@ -257,7 +257,7 @@ public class HadoopUtil {
                 if (Files.exists(Paths.get(possibleHadoopConfPath))
                         && Files.exists(Paths.get(possibleHadoopConfPath,"core-site.xml"))) {
                     confDir = possibleHadoopConfPath;
-                    if (null != confDir){
+                    if (null != confDir) {
                         return confDir;
                     }
                 }

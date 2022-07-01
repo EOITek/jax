@@ -119,7 +119,7 @@ public class Common {
     }
 
     public static String replaceJaxHomeAsPath(String oldPath) {
-        if(oldPath.contains(VAR_JAX_HOME)){
+        if (oldPath.contains(VAR_JAX_HOME)) {
             String replacedPath = StrUtil.replace(oldPath, VAR_JAX_HOME, ConfigLoader.load().jax.getHome());
             return Paths.get(replacedPath).toString();
         }
