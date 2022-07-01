@@ -118,11 +118,12 @@ public class Common {
         return resource.readBytes();
     }
 
-    public static String replaceJaxHomeAsPath(String var) {
-        var = StrUtil.replace(var,
-                VAR_JAX_HOME,
-                ConfigLoader.load().jax.getHome());
-        return Paths.get(var).toString();
+    public static String replaceJaxHomeAsPath(String oldPath) {
+        if(oldPath.contains(VAR_JAX_HOME)){
+            String replacedPath = StrUtil.replace(oldPath, VAR_JAX_HOME, ConfigLoader.load().jax.getHome());
+            return Paths.get(replacedPath).toString();
+        }
+        return oldPath;
     }
 
 }

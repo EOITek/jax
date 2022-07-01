@@ -254,10 +254,12 @@ public class HadoopUtil {
             }
 
             for (String possibleHadoopConfPath :possiblePaths) {
-
                 if (Files.exists(Paths.get(possibleHadoopConfPath))
                         && Files.exists(Paths.get(possibleHadoopConfPath,"core-site.xml"))) {
                     confDir = possibleHadoopConfPath;
+                    if (null != confDir){
+                        return confDir;
+                    }
                 }
             }
         } catch (RuntimeException e) {
