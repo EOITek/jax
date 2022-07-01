@@ -241,14 +241,15 @@ public class HadoopUtil {
     }
 
     public static String getConfDirFromHadoopHome(String hadoopHome) {
-        String[] possiblePaths = new String[4];
         String confDir = null;
+        if (null == hadoopHome || hadoopHome.isEmpty()) {
+            return confDir;
+        }
+        String[] possiblePaths = new String[4];
         try {
-            if (hadoopHome != null) {
-                possiblePaths[0] = Paths.get(hadoopHome, AppConfig.HADOOP_ETC_RELATIVE).toString(); // eoitek hadoop
-                possiblePaths[1] = Paths.get(hadoopHome,AppConfig.HADOOP_ETC_HADOOP_RELATIVE).toString(); // apache hadoop
-                possiblePaths[2] = Paths.get(hadoopHome,AppConfig.HADOOP_CONF).toString(); // old hadoop version
-            }
+            possiblePaths[0] = Paths.get(hadoopHome, AppConfig.HADOOP_ETC_RELATIVE).toString(); // eoitek hadoop
+            possiblePaths[1] = Paths.get(hadoopHome,AppConfig.HADOOP_ETC_HADOOP_RELATIVE).toString(); // apache hadoop
+            possiblePaths[2] = Paths.get(hadoopHome,AppConfig.HADOOP_CONF).toString(); // old hadoop version
             if (null != System.getenv(AppConfig.HADOOP_CONF_DIR)) {
                 possiblePaths[3] = Paths.get(System.getenv(AppConfig.HADOOP_CONF_DIR)).toString(); // from env
             }
@@ -263,7 +264,7 @@ public class HadoopUtil {
                 }
             }
         } catch (RuntimeException e) {
-            logger.warn("Failed to parse HADOOP_CONF_DIR,cause: " + e.getMessage(),e);
+            logger.warn("Catch Failure: parse HADOOP_CONF_DIR by hadoopHome=" + hadoopHome + ",cause: " + e.getMessage(),e);
         }
         return confDir;
     }
