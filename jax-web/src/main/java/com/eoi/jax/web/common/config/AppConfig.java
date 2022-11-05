@@ -28,7 +28,9 @@ public class AppConfig {
     public static final String JAX_JOB_JAR_LIB = "jaxjobjarlib";
     public static final String JAX_JOB_WORK_DIR = "jaxjobworkdir";
     public static final String JAX_JOB_PYTHON_DIR = "jaxjobpythondir";
-    public static final String HADOOP_ETC_RELATIVE = "etc/hadoop";
+    public static final String HADOOP_ETC_RELATIVE = "etc";
+    public static final String HADOOP_ETC_HADOOP_RELATIVE = "etc/hadoop";
+    public static final String HADOOP_CONF = "conf";
     public static final String HADOOP_YARN_BIN_RELATIVE = "bin/yarn";
     public static final String FLINK_BIN_RELATIVE = "bin/flink";
     public static final String SPARK_BIN_RELATIVE = "bin/spark-submit";

@@ -10,11 +10,22 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: my-secret-pw
     ports:
-      - "9999:9999"
+      - "49999:9999"
     volumes:
       - web-data:/app/jax/jar_dir
     networks:
       - jax
+  db:
+    image: mysql:5.7.25
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: jax_db
+    ports:
+      - "43306:3306"
+    networks:
+      - jax
+    volumes:
+      - db-data:/var/lib/mysql
   taskmanager:
     image: ${FLINK_IMAGE:-flink:1.9.1-scala_2.11}
     command: taskmanager
@@ -35,18 +46,25 @@ services:
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
     ports:
-      - "8081:8081"
+      - "48081:8081"
     networks:
       - jax
-  db:
-    image: mysql:5.7.25
+  zookeeper:
+    image: wurstmeister/zookeeper
+    networks:
+      - jax
+  kafka:
+    image: wurstmeister/kafka
+    depends_on:
+      - zookeeper
     environment:
-      MYSQL_ROOT_PASSWORD: my-secret-pw
-      MYSQL_DATABASE: jax_db
+      KAFKA_ADVERTISED_HOST_NAME: ${KAFKA_AD_IP:-kafka}
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_BROKER_ID: 1
+      KAFKA_CREATE_TOPICS: sourceTopic:2:1,sinkTopic:2:1
     networks:
       - jax
-    volumes:
-      - db-data:/var/lib/mysql
 
 networks:
   jax:

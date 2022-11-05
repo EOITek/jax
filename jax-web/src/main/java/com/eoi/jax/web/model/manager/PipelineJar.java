@@ -22,7 +22,7 @@ public class PipelineJar {
     private TbCluster cluster;
 
     public PipelineJar(TbJar jar, TbCluster cluster) {
-        this.jar = jar;
+        this.jar = jar.cloneFromDB();
         this.cluster = cluster;
     }
 

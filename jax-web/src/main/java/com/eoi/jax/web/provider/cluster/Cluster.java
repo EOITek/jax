@@ -17,6 +17,7 @@ package com.eoi.jax.web.provider.cluster;
 import com.eoi.jax.web.common.config.ConfigLoader;
 import com.eoi.jax.web.common.config.JaxConfig;
 import com.eoi.jax.web.common.util.Common;
+import com.eoi.jax.web.common.util.HadoopUtil;
 import com.eoi.jax.web.dao.entity.TbCluster;
 import com.eoi.jax.web.dao.entity.TbOptsFlink;
 import com.eoi.jax.web.dao.entity.TbOptsSpark;
@@ -239,7 +240,7 @@ public class Cluster {
         setClusterName(clusterEntity.getClusterName());
         setClusterType(clusterEntity.getClusterType());
         setHadoopHome(ClusterVariable.replaceVariable(clusterEntity.getHadoopHome()));
-        setHadoopConfig(ClusterVariable.genHadoopConf(getHadoopHome()));
+        setHadoopConfig(HadoopUtil.getConfDirFromHadoopHome(getHadoopHome()));
         setYarnBin(ClusterVariable.genYarnBin(getHadoopHome()));
         setHdfsServer(clusterEntity.getHdfsServer());
         setFlinkServer(clusterEntity.getFlinkServer());

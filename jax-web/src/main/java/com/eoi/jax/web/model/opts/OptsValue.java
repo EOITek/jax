@@ -25,4 +25,5 @@ public @interface OptsValue {
     OptsValueType type() default OptsValueType.STRING;
     boolean required() default true;
     String description() default "";
+    String label() default "";
 }

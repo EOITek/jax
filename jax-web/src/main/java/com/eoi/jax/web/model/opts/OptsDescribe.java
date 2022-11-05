@@ -20,6 +20,7 @@ public class OptsDescribe {
     private Object value;
     private String description;
     private Boolean required;
+    private String label;
 
     public String getName() {
         return name;
@@ -64,5 +65,13 @@ public class OptsDescribe {
     public OptsDescribe setRequired(Boolean required) {
         this.required = required;
         return this;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 }

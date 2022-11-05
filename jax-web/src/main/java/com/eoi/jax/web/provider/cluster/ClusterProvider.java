@@ -24,6 +24,7 @@ import com.eoi.jax.web.dao.entity.TbOptsSpark;
 import com.eoi.jax.web.model.cluster.ClusterReq;
 import com.eoi.jax.web.model.opts.OptsFlinkReq;
 import com.eoi.jax.web.model.opts.OptsSparkReq;
+import org.apache.hadoop.conf.Configuration;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -108,11 +109,13 @@ public class ClusterProvider {
 
     private ClusterReq fillHadoopMetaInfo(ClusterReq req) {
         if (ClusterType.YARN.isEqual(req.getClusterType()) && StrUtil.isNotEmpty(req.getHadoopHome())) {
-            String hadoopConfDir = ClusterVariable.genHadoopConf(
-                    ClusterVariable.replaceVariable(req.getHadoopHome())
-            );
-            req.setHdfsServer(HadoopUtil.readHdfsServer(hadoopConfDir));
-            req.setYarnWebUrl(HadoopUtil.readYarnWebUrl(hadoopConfDir));
+            Configuration hadoopConf = HadoopUtil.getConfFromHadoopHome(req.getHadoopHome());
+            if (null != hadoopConf) {
+                req.setHdfsServer(hadoopConf.get(HadoopUtil.HDFS_DEFAULT_NAME_KEY));
+                req.setYarnWebUrl(HadoopUtil.getYarnWebUrl(hadoopConf));
+            } else {
+                throw new IllegalArgumentException("Cannot find HADOOP_CONF_DIR from HADOOP_HOME=" + req.getHadoopHome());
+            }
         }
         return req;
     }

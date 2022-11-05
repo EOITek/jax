@@ -45,8 +45,16 @@ unpack-flink:
 	mkdir -p tmp && rm -f tmp/flink-1.12.3-bin-scala_2.11.tgz && wget -P tmp/ https://mirrors.huaweicloud.com/apache/flink/flink-1.12.3/flink-1.12.3-bin-scala_2.11.tgz
 	rm -rf tmp/jax/flink-1.12.3 && tar -zxf tmp/flink-1.12.3-bin-scala_2.11.tgz -C tmp/jax && rm -f tmp/flink-1.12.3-bin-scala_2.11.tgz
 
+
+.PHONY: unpack-builtin-stages
+unpack-builtin-stages:
+	mkdir -p /tmp/jax/builtin-stages && rm -rf /tmp/jax/builtin-stages
+	cp jax-flink-job-1_9/target/jax-flink-job-1_9-${JAX_VERSION}.jar tmp/jax/jax/jar_dir/ && mv tmp/jax/jax/jar_dir/jax-flink-job-1_9-${JAX_VERSION}.jar tmp/jax/jax/jar_dir/jax-flink-job-1_9_jars.jar
+	cp jax-flink-job/target/jax-flink-job-${JAX_VERSION}.jar tmp/jax/jax/jar_dir/ && mv tmp/jax/jax/jar_dir/jax-flink-job-${JAX_VERSION}.jar tmp/jax/jax/jar_dir/jax-flink-job_jars.jar
+
+
 .PHONY: package-all
-package-all: unpack-jax unpack-flink
+package-all: unpack-jax unpack-flink unpack-builtin-stages
 	cd tmp && tar -zcf jax-all-${JAX_VERSION}-${DATE}-${COMMIT_ID}.tar.gz jax/
 
 .PHONY: image

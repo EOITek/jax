@@ -27,6 +27,7 @@ import com.eoi.jax.web.model.pipeline.PipelineQueryReq;
 import com.eoi.jax.web.model.pipeline.PipelineReq;
 import com.eoi.jax.web.model.pipeline.PipelineResp;
 import com.eoi.jax.web.service.PipelineService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,6 +57,7 @@ public class PipelineController extends V1Controller {
      * @param status 状态：运行中（RUNNING）、已完成（FINISHED）、运行失败（FAILED）
      * @param inStatus 内部状态：运行中（RUNNING）、已完成（FINISHED）、运行失败（FAILED）
      */
+    @ApiOperation("获取pipeline列表")
     @GetMapping("pipeline")
     public ResponseResult<List<PipelineResp>> list(
             @RequestParam(value = "search", required = false) String search,
@@ -70,17 +72,20 @@ public class PipelineController extends V1Controller {
         return new ResponseResult<List<PipelineResp>>().setEntity(page.getList()).setTotal(page.getTotal());
     }
 
+    @ApiOperation("分页查询pipeline")
     @PostMapping("pipeline/list/query")
     public ResponseResult<List<PipelineResp>> queryPipeline(@RequestBody PipelineQueryReq req) {
         Paged<PipelineResp> page = pipelineService.queryPipeline(req);
         return new ResponseResult<List<PipelineResp>>().setEntity(page.getList()).setTotal(page.getTotal());
     }
 
+    @ApiOperation("获取pipeline详情")
     @GetMapping("pipeline/{pipelineName}")
     public ResponseResult<PipelineResp> get(@PathVariable("pipelineName") String pipelineName) {
         return new ResponseResult<PipelineResp>().setEntity(pipelineService.getPipeline(pipelineName));
     }
 
+    @ApiOperation("新建pipeline草稿")
     @PostMapping("pipeline/{pipelineName}/draft")
     public ResponseResult<PipelineResp> createDraft(
             @PathVariable("pipelineName") String pipelineName,
@@ -89,6 +94,7 @@ public class PipelineController extends V1Controller {
         return new ResponseResult<PipelineResp>().setEntity(pipelineService.createDraft(req));
     }
 
+    @ApiOperation("修改pipeline草稿")
     @PutMapping("pipeline/{pipelineName}/draft")
     public ResponseResult<PipelineResp> updateDraft(
             @PathVariable("pipelineName") String pipelineName,
@@ -97,6 +103,7 @@ public class PipelineController extends V1Controller {
         return new ResponseResult<PipelineResp>().setEntity(pipelineService.updateDraft(req));
     }
 
+    @ApiOperation("暂存pipeline")
     @PostMapping("pipeline/{pipelineName}/stage")
     public ResponseResult<PipelineResp> createStage(
             @PathVariable("pipelineName") String pipelineName,
@@ -105,6 +112,7 @@ public class PipelineController extends V1Controller {
         return new ResponseResult<PipelineResp>().setEntity(pipelineService.createStage(req));
     }
 
+    @ApiOperation("暂存pipeline")
     @PutMapping("pipeline/{pipelineName}/stage")
     public ResponseResult<PipelineResp> updateStage(
             @PathVariable("pipelineName") String pipelineName,
@@ -114,6 +122,7 @@ public class PipelineController extends V1Controller {
         return new ResponseResult<PipelineResp>().setEntity(pipelineService.updateStage(req,  Boolean.TRUE.equals(autoCreate)));
     }
 
+    @ApiOperation("新建pipeline并启动")
     @PostMapping("pipeline/{pipelineName}")
     public ResponseResult<PipelineResp> create(
             @PathVariable("pipelineName") String pipelineName,
@@ -122,6 +131,7 @@ public class PipelineController extends V1Controller {
         return new ResponseResult<PipelineResp>().setEntity(pipelineService.createPipeline(req));
     }
 
+    @ApiOperation("修改pipeline并启动")
     @PutMapping("pipeline/{pipelineName}")
     public ResponseResult<PipelineResp> update(
             @PathVariable("pipelineName") String pipelineName,
@@ -134,6 +144,7 @@ public class PipelineController extends V1Controller {
         );
     }
 
+    @ApiOperation("启动pipeline")
     @PutMapping("pipeline/{pipelineName}/start")
     public ResponseResult<PipelineResp> start(
             @PathVariable("pipelineName") String pipelineName,
@@ -144,6 +155,7 @@ public class PipelineController extends V1Controller {
         );
     }
 
+    @ApiOperation("停止pipeline")
     @PutMapping("pipeline/{pipelineName}/stop")
     public ResponseResult<PipelineResp> stop(
             @PathVariable("pipelineName") String pipelineName,
@@ -156,6 +168,7 @@ public class PipelineController extends V1Controller {
         );
     }
 
+    @ApiOperation("删除pipeline")
     @DeleteMapping("pipeline/{pipelineName}")
     public ResponseResult<PipelineResp> delete(
             @PathVariable("pipelineName") String pipelineName,
@@ -166,11 +179,13 @@ public class PipelineController extends V1Controller {
         );
     }
 
+    @ApiOperation("pipeline日志")
     @GetMapping("pipeline/{pipelineName}/log")
     public ResponseResult<List<TbPipelineLog>> log(@PathVariable("pipelineName") String pipelineName) {
         return new ResponseResult<List<TbPipelineLog>>().setEntity(pipelineService.logPipeline(pipelineName));
     }
 
+    @ApiOperation("pipeline控制台")
     @GetMapping("pipeline/{pipelineName}/console")
     public ResponseResult<List<TbPipelineConsole>> listConsole(@PathVariable("pipelineName") String pipelineName,
                                                                @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
@@ -180,11 +195,13 @@ public class PipelineController extends V1Controller {
         return new ResponseResult<List<TbPipelineConsole>>().setEntity(page.getRecords()).setTotal(page.getTotal());
     }
 
+    @ApiOperation("pipeline控制台删除")
     @DeleteMapping("pipeline/{pipelineName}/console")
     public ResponseResult<Boolean> deleteConsole(@PathVariable("pipelineName") String pipelineName) {
         return new ResponseResult<Boolean>().setEntity(pipelineService.deletePipelineConsole(pipelineName));
     }
 
+    @ApiOperation("批量导出pipeline")
     @PostMapping("pipeline-export")
     public void export(@ModelAttribute PipelineExportFormReq req, final HttpServletResponse response) throws IOException {
         response.reset();
@@ -194,16 +211,19 @@ public class PipelineController extends V1Controller {
         pipelineService.exportPipeline(request, response.getOutputStream());
     }
 
+    @ApiOperation("批量导入pipeline")
     @PostMapping("pipeline-import")
     public ResponseResult<List<Tuple<String, String>>> importPipeline(@RequestParam("file") MultipartFile file) {
         return new ResponseResult<List<Tuple<String, String>>>().setEntity(pipelineService.importPipeline(file));
     }
 
+    @ApiOperation("批量导入pipeline-内置")
     @PostMapping("pipeline-import/build-in")
     public ResponseResult<List<Tuple<String, String>>> importBuildInPipeline(@RequestBody PipelineBuildIn req) {
         return new ResponseResult<List<Tuple<String, String>>>().setEntity(pipelineService.importPipeline(req));
     }
 
+    @ApiOperation("build-in jar")
     @GetMapping("pipeline-import/build-in")
     public ResponseResult<PipelineBuildIn> buildIns() {
         return new ResponseResult<PipelineBuildIn>().setEntity(pipelineService.listBuildIns());

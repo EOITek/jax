@@ -17,6 +17,7 @@ package com.eoi.jax.web.common.util;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import com.eoi.jax.web.common.ResponseCode;
+import com.eoi.jax.web.common.config.AppConfig;
 import com.eoi.jax.web.common.exception.BizException;
 import com.eoi.jax.web.dao.entity.TbCluster;
 import com.eoi.jax.web.provider.cluster.ClusterVariable;
@@ -36,6 +37,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.PrivilegedExceptionAction;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,6 +81,10 @@ public class HadoopUtil {
 
     public static String readYarnWebUrl(String configHome) {
         Configuration config = readConfig(configHome);
+        return getYarnWebUrl(config);
+    }
+
+    public static String getYarnWebUrl(Configuration config) {
         String schema = "http://";
         String webUrl = null;
         // HA
@@ -224,4 +231,42 @@ public class HadoopUtil {
         }
         return finalPath;
     }
+
+    public static Configuration getConfFromHadoopHome(String hadoopHome) {
+        String confDir = getConfDirFromHadoopHome(hadoopHome);
+        if (null != confDir) {
+            return readConfig(confDir);
+        }
+        return null;
+    }
+
+    public static String getConfDirFromHadoopHome(String hadoopHome) {
+        String confDir = null;
+        if (null == hadoopHome || hadoopHome.isEmpty()) {
+            return confDir;
+        }
+        String[] possiblePaths = new String[4];
+        try {
+            possiblePaths[0] = Paths.get(hadoopHome, AppConfig.HADOOP_ETC_RELATIVE).toString(); // eoitek hadoop
+            possiblePaths[1] = Paths.get(hadoopHome,AppConfig.HADOOP_ETC_HADOOP_RELATIVE).toString(); // apache hadoop
+            possiblePaths[2] = Paths.get(hadoopHome,AppConfig.HADOOP_CONF).toString(); // old hadoop version
+            if (null != System.getenv(AppConfig.HADOOP_CONF_DIR)) {
+                possiblePaths[3] = Paths.get(System.getenv(AppConfig.HADOOP_CONF_DIR)).toString(); // from env
+            }
+
+            for (String possibleHadoopConfPath :possiblePaths) {
+                if (Files.exists(Paths.get(possibleHadoopConfPath))
+                        && Files.exists(Paths.get(possibleHadoopConfPath,"core-site.xml"))) {
+                    confDir = possibleHadoopConfPath;
+                    if (null != confDir) {
+                        return confDir;
+                    }
+                }
+            }
+        } catch (RuntimeException e) {
+            logger.warn("Catch Failure: parse HADOOP_CONF_DIR by hadoopHome=" + hadoopHome + ",cause: " + e.getMessage(),e);
+        }
+        return confDir;
+    }
+
 }

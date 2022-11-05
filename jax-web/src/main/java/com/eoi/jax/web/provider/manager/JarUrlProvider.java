@@ -15,7 +15,6 @@
 package com.eoi.jax.web.provider.manager;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import com.eoi.jax.common.PythonHelper;
 import com.eoi.jax.web.common.config.AppConfig;
@@ -30,6 +29,8 @@ import com.eoi.jax.web.provider.cluster.Cluster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -93,7 +94,8 @@ public class JarUrlProvider {
     }
 
     public FileUrl genWorkUrl(String filePath) {
-        return genFileUrl(ConfigLoader.load().jax.getWork(), filePath, AppConfig.JAX_JOB_WORK_DIR);
+        String workDir = Common.pathsJoin(ConfigLoader.load().jax.getWork());
+        return genFileUrl(workDir, filePath, AppConfig.JAX_JOB_WORK_DIR);
     }
 
     public FileUrl genJarLibUrl(String filePath) {
@@ -109,13 +111,15 @@ public class JarUrlProvider {
     }
 
     private FileUrl genFileUrl(String dirPath, String filePath, String httpBase) {
+        Path dir = Paths.get(dirPath);
+        Path file = Paths.get(filePath);
         if (!FileUtil.exist(filePath)) {
             throw new JaxException("the file " + filePath + " is not exist");
         }
-        if (!StrUtil.startWith(filePath, dirPath)) {
+        if (!file.startsWith(dir)) {
             throw new JaxException("the file " + filePath + " is not in dictionary " + dirPath);
         }
-        String relativePath = StrUtil.unWrap(StrUtil.removePrefix(filePath, dirPath), '/');
+        String relativePath = dir.relativize(file).toString();
         String url = Common.urlPathsJoin(getListeningHttp(), httpBase, relativePath);
         String name = FileUtil.getName(filePath);
         return new FileUrl().setName(name).setUrl(url).setPath(filePath);
